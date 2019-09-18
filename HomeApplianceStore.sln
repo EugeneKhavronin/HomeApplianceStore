@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeApplianceStore.API", "HomeApplianceStore.API\HomeApplianceStore.API.csproj", "{F0A3A761-D8C2-448B-A61B-9F71F97C55DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeApplianceStore.Database", "HomeApplianceStore.Database\HomeApplianceStore.Database.csproj", "{7BA1FE10-0640-4AFF-9843-A11146FA7B00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeApplianceStore.Domain", "HomeApplianceStore.Domain\HomeApplianceStore.Domain.csproj", "{1AFAA60B-CBB8-467C-A522-BFB4523BF717}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0A3A761-D8C2-448B-A61B-9F71F97C55DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0A3A761-D8C2-448B-A61B-9F71F97C55DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0A3A761-D8C2-448B-A61B-9F71F97C55DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0A3A761-D8C2-448B-A61B-9F71F97C55DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BA1FE10-0640-4AFF-9843-A11146FA7B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA1FE10-0640-4AFF-9843-A11146FA7B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA1FE10-0640-4AFF-9843-A11146FA7B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA1FE10-0640-4AFF-9843-A11146FA7B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AFAA60B-CBB8-467C-A522-BFB4523BF717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AFAA60B-CBB8-467C-A522-BFB4523BF717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AFAA60B-CBB8-467C-A522-BFB4523BF717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AFAA60B-CBB8-467C-A522-BFB4523BF717}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
