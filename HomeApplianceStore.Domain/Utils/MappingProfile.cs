@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Models.Client;

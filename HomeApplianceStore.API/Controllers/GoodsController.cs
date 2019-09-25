@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Interfaces;
 using HomeApplianceStore.Domain.Models.Goods;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeApplianceStore.API.Controllers
@@ -12,7 +12,6 @@ namespace HomeApplianceStore.API.Controllers
     /// Контроллер товаров
     /// </summary>
     [Route("api/goods")]
-    [Authorize]
     public class GoodsController : Controller
     {
         private readonly IGoodsService _goodsService;
@@ -23,6 +22,39 @@ namespace HomeApplianceStore.API.Controllers
             _goodsService = goodsService;
         }
 
+        /// <summary>
+        /// Получение товаров по заданному типу
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{type}/Type")]
+        public async Task<List<GoodsViewModel>> GetGoodsByType(string type)
+        {
+            return await _goodsService.GetAllByType(type);
+        }
+        
+        /// <summary>
+        /// Получение товаров по заданному типу
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{manufacturer}/Manufacturer")]
+        public async Task<List<GoodsViewModel>> GetGoodsByManufacturer(string manufacturer)
+        {
+            return await _goodsService.GetAllByManufacturer(manufacturer);
+        }
+        
+        /// <summary>
+        /// Получение товаров по заданному типу
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{specifications}/Specifications")]
+        public async Task<List<GoodsViewModel>> GetGoodsBySpecifications(List<Specifications> specifications)
+        {
+            return await _goodsService.GetAllBySpecification(specifications);
+        }
+        
         /// <summary>
         /// Получение товаров
         /// </summary>

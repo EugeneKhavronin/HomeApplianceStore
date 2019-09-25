@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Models.Goods;
 
 namespace HomeApplianceStore.Domain.Interfaces
@@ -10,6 +11,27 @@ namespace HomeApplianceStore.Domain.Interfaces
     /// </summary>
     public interface IGoodsService
     {
+        /// <summary>
+        /// Получение всех товаров с заданным типом
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        Task<List<GoodsViewModel>> GetAllByType(string type);
+        
+        /// <summary>
+        /// Получение всех товаров с заданным производителем
+        /// </summary>
+        /// <param name="manufacturer"></param>
+        /// <returns></returns>
+        Task<List<GoodsViewModel>> GetAllByManufacturer(string manufacturer);
+        
+        /// <summary>
+        /// Получение всех товаров с заданной характеристикой
+        /// </summary>
+        /// <param name="specifications"></param>
+        /// <returns></returns>
+        Task<List<GoodsViewModel>> GetAllBySpecification(List<Specifications> specifications);
+        
         /// <summary>
         /// Получение всех товаров
         /// </summary>

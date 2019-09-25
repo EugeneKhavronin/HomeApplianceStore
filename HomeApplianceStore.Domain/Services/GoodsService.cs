@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using HomeApplianceStore.Database;
@@ -24,6 +25,27 @@ namespace HomeApplianceStore.Domain.Services
             _context = context;
         }
 
+        /// <inheritdoc />
+        public async Task<List<GoodsViewModel>> GetAllByType(string type)
+        {
+            var goods = await _context.Goods.Where(a=>a.Type==type).ToListAsync();
+            return _mapper.Map<List<Goods>, List<GoodsViewModel>>(goods);
+        }
+        
+        /// <inheritdoc />
+        public async Task<List<GoodsViewModel>> GetAllByManufacturer(string manufacturer)
+        {
+            var goods = await _context.Goods.Where(a=>a.Manufacturer==manufacturer).ToListAsync();
+            return _mapper.Map<List<Goods>, List<GoodsViewModel>>(goods);
+        }
+        
+        /// <inheritdoc />
+        public async Task<List<GoodsViewModel>> GetAllBySpecification(List<Specifications> specifications)
+        {
+            var goods = await _context.Goods.Where(a=>a.Specifications==specifications).ToListAsync();
+            return _mapper.Map<List<Goods>, List<GoodsViewModel>>(goods);
+        }
+        
         /// <inheritdoc />
         public async Task<List<GoodsViewModel>> GetAll()
         {

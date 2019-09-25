@@ -12,7 +12,6 @@ namespace HomeApplianceStore.API.Controllers
     /// Контроллер клиентов
     /// </summary>
     [Route("api/client")]
-    [Authorize]
     public class ClientController : Controller
     {
         private readonly IClientService _clientService;
