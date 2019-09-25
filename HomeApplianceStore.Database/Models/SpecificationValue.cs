@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HomeApplianceStore.Database.Models
 {
     /// <summary>
-    /// Класс характеристик
+    /// Класс содержащий значения характеристик
     /// </summary>
-    public class Specifications
+    public class SpecificationValue
     {
         /// <summary>
         /// Уникальный идентификатор
@@ -15,13 +15,8 @@ namespace HomeApplianceStore.Database.Models
         public Guid Guid { get; set; }
         
         /// <summary>
-        /// Название спецификации
+        /// Значение характеристики
         /// </summary>
-        public string SpecificationName { get; set; }
-        
-        /// <summary>
-        /// Уникальный идентификатор значения
-        /// </summary>
-        public Guid ValueGuid { get; set; }
+        public string Value { get; set; }
     }
 }

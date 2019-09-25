@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using HomeApplianceStore.Database.Enums;
 
 namespace HomeApplianceStore.Database.Models
 {
@@ -19,7 +18,7 @@ namespace HomeApplianceStore.Database.Models
         /// <summary>
         /// Роль пользователя
         /// </summary>
-        public Role Role { get; set; }
+        public Guid RoleGuid { get; set; }
         
         /// <summary>
         /// Логин

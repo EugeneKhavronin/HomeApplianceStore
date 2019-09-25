@@ -1,4 +1,3 @@
-using System.IdentityModel.Tokens.Jwt;
 using HomeApplianceStore.Domain.Models.Client;
 
 namespace HomeApplianceStore.Domain.Models

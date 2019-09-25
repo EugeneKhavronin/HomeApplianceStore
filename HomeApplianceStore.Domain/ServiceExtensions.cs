@@ -10,6 +10,7 @@ namespace HomeApplianceStore.Domain
         {
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IGoodsService, GoodsService>();
 
             return services;
         }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using HomeApplianceStore.Database.Models;
-using HomeApplianceStore.Domain.Models.Enums;
 
 namespace HomeApplianceStore.Domain.Models.Client
 {
@@ -22,7 +21,7 @@ namespace HomeApplianceStore.Domain.Models.Client
         /// <summary>
         /// Роль пользователя
         /// </summary>
-        public Role Role { get; set; }
+        public Guid RoleGuid { get; set; }
         
         /// <summary>
         /// Логин
