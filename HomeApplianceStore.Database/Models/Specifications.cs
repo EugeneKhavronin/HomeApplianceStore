@@ -23,5 +23,10 @@ namespace HomeApplianceStore.Database.Models
         /// Уникальный идентификатор значения
         /// </summary>
         public Guid ValueGuid { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public SpecificationValue SpecificationValue { get; set; }
     }
 }

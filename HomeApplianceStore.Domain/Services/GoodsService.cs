@@ -42,7 +42,7 @@ namespace HomeApplianceStore.Domain.Services
         /// <inheritdoc />
         public async Task<List<GoodsViewModel>> GetAllBySpecification(List<Specifications> specifications)
         {
-            var goods = await _context.Goods.Where(a=>a.Specifications==specifications).ToListAsync();
+            var goods = await _context.Goods.Where(a=>a.Specifications==specifications).Include(a => a.Specifications.FirstOrDefault().SpecificationValue.Value).ToListAsync();
             return _mapper.Map<List<Goods>, List<GoodsViewModel>>(goods);
         }
         
