@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HomeApplianceStore.Database.Models;
-using HomeApplianceStore.Domain.Models.Goods;
 
 namespace HomeApplianceStore.Domain.Interfaces
 {
@@ -16,48 +15,48 @@ namespace HomeApplianceStore.Domain.Interfaces
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        Task<List<GoodsViewModel>> GetAllByType(string type);
+        Task<List<Goods>> GetAllByType(string type);
         
         /// <summary>
         /// Получение всех товаров с заданным производителем
         /// </summary>
         /// <param name="manufacturer"></param>
         /// <returns></returns>
-        Task<List<GoodsViewModel>> GetAllByManufacturer(string manufacturer);
+        Task<List<Goods>> GetAllByManufacturer(string manufacturer);
         
         /// <summary>
         /// Получение всех товаров с заданной характеристикой
         /// </summary>
         /// <param name="specifications"></param>
         /// <returns></returns>
-        Task<List<GoodsViewModel>> GetAllBySpecification(List<Specifications> specifications);
+        Task<List<Goods>> GetAllBySpecification(List<Specifications> specifications);
         
         /// <summary>
         /// Получение всех товаров
         /// </summary>
         /// <returns></returns>
-        Task<List<GoodsViewModel>> GetAll();
+        Task<List<Goods>> GetAll();
         
         /// <summary>
         /// Получение товара
         /// </summary>
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
-        Task<GoodsViewModel> Get(Guid guid);
+        Task<Goods> Get(Guid guid);
         
         /// <summary>
         /// Добавление товара
         /// </summary>
         /// <param name="model">Модель товара</param>
         /// <returns></returns>
-        Task<Guid> Create(GoodsCreateModel model);
+        Task<Guid> Create(Goods model);
 
         /// <summary>
         /// Изменение товара
         /// </summary>
         /// <param name="model">Модель товара</param>
         /// <returns></returns>
-        Task<Guid> Update(GoodsUpdateModel model);
+        Task<Guid> Update(Goods model);
 
         /// <summary>
         /// Удаление товара

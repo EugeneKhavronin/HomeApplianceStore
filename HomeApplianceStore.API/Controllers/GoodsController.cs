@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Interfaces;
-using HomeApplianceStore.Domain.Models.Goods;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeApplianceStore.API.Controllers
@@ -28,7 +27,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{type}/Type")]
-        public async Task<List<GoodsViewModel>> GetGoodsByType([FromRoute] string type)
+        public async Task<List<Goods>> GetGoodsByType([FromRoute] string type)
         {
             return await _goodsService.GetAllByType(type);
         }
@@ -39,7 +38,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{manufacturer}/Manufacturer")]
-        public async Task<List<GoodsViewModel>> GetGoodsByManufacturer([FromRoute] string manufacturer)
+        public async Task<List<Goods>> GetGoodsByManufacturer([FromRoute] string manufacturer)
         {
             return await _goodsService.GetAllByManufacturer(manufacturer);
         }
@@ -50,7 +49,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{specifications}/Specifications")]
-        public async Task<List<GoodsViewModel>> GetGoodsBySpecifications([FromBody]List<Specifications> specifications)
+        public async Task<List<Goods>> GetGoodsBySpecifications([FromBody]List<Specifications> specifications)
         {
             return await _goodsService.GetAllBySpecification(specifications);
         }
@@ -60,7 +59,7 @@ namespace HomeApplianceStore.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<GoodsViewModel>> GetGoods()
+        public async Task<List<Goods>> GetGoods()
         {
             return await _goodsService.GetAll();
         }
@@ -71,7 +70,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
         [HttpGet("{guid}")]
-        public async Task<GoodsViewModel> GetGoods([FromRoute] Guid guid)
+        public async Task<Goods> GetGoods([FromRoute] Guid guid)
         {
             return await _goodsService.Get(guid);
         }
@@ -82,7 +81,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="model">Модель товара</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Guid> CreateGoods([FromBody] GoodsCreateModel model)
+        public async Task<Guid> CreateGoods([FromBody] Goods model)
         {
             return await _goodsService.Create(model);
         }
@@ -93,7 +92,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="model">Модель товара</param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<Guid> UpdateGoods([FromBody] GoodsUpdateModel model)
+        public async Task<Guid> UpdateGoods([FromBody] Goods model)
         {
             return await _goodsService.Update(model);
         }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HomeApplianceStore.Domain.Models.Client;
+using HomeApplianceStore.Database.Models;
 
 namespace HomeApplianceStore.Domain.Interfaces
 {
@@ -14,28 +14,28 @@ namespace HomeApplianceStore.Domain.Interfaces
         /// Получение всех клиентов
         /// </summary>
         /// <returns></returns>
-        Task<List<ClientViewModel>> GetAll();
+        Task<List<Client>> GetAll();
         
         /// <summary>
         /// Получение клиента
         /// </summary>
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
-        Task<ClientViewModel> Get(Guid guid);
+        Task<Client> Get(Guid guid);
         
         /// <summary>
         /// Добавление клиента
         /// </summary>
         /// <param name="model">Модель клиента</param>
         /// <returns></returns>
-        Task<Guid> Create(ClientCreateModel model);
+        Task<Guid> Create(Client model);
 
         /// <summary>
         /// Изменение клиента
         /// </summary>
         /// <param name="model">Модель клиента</param>
         /// <returns></returns>
-        Task<Guid> Update(ClientUpdateModel model);
+        Task<Guid> Update(Client model);
 
         /// <summary>
         /// Удаление клиента

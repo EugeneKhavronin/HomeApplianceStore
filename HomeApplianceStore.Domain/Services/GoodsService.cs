@@ -6,7 +6,6 @@ using AutoMapper;
 using HomeApplianceStore.Database;
 using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Interfaces;
-using HomeApplianceStore.Domain.Models.Goods;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeApplianceStore.Domain.Services
@@ -26,42 +25,42 @@ namespace HomeApplianceStore.Domain.Services
         }
 
         /// <inheritdoc />
-        public async Task<List<GoodsViewModel>> GetAllByType(string type)
+        public async Task<List<Goods>> GetAllByType(string type)
         {
             var goods = await _context.Goods.Where(a=>a.Type==type).ToListAsync();
-            return _mapper.Map<List<Goods>, List<GoodsViewModel>>(goods);
+            return _mapper.Map<List<Goods>, List<Goods>>(goods);
         }
         
         /// <inheritdoc />
-        public async Task<List<GoodsViewModel>> GetAllByManufacturer(string manufacturer)
+        public async Task<List<Goods>> GetAllByManufacturer(string manufacturer)
         {
             var goods = await _context.Goods.Where(a=>a.Manufacturer==manufacturer).ToListAsync();
-            return _mapper.Map<List<Goods>, List<GoodsViewModel>>(goods);
+            return _mapper.Map<List<Goods>, List<Goods>>(goods);
         }
         
         /// <inheritdoc />
-        public async Task<List<GoodsViewModel>> GetAllBySpecification(List<Specifications> specifications)
+        public async Task<List<Goods>> GetAllBySpecification(List<Specifications> specifications)
         {
             var goods = await _context.Goods.Where(a=>a.Specifications==specifications).Include(a => a.Specifications.FirstOrDefault().SpecificationValue.Value).ToListAsync();
-            return _mapper.Map<List<Goods>, List<GoodsViewModel>>(goods);
+            return _mapper.Map<List<Goods>, List<Goods>>(goods);
         }
         
         /// <inheritdoc />
-        public async Task<List<GoodsViewModel>> GetAll()
+        public async Task<List<Goods>> GetAll()
         {
             var goods = await _context.Goods.ToListAsync();
-            return _mapper.Map<List<Goods>, List<GoodsViewModel>>(goods);
+            return _mapper.Map<List<Goods>, List<Goods>>(goods);
         }
         
         /// <inheritdoc />
-        public async Task<GoodsViewModel> Get(Guid guid)
+        public async Task<Goods> Get(Guid guid)
         {
             var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid);
-            return _mapper.Map<Goods, GoodsViewModel>(goods);
+            return _mapper.Map<Goods, Goods>(goods);
         }
         
         /// <inheritdoc />
-        public async Task<Guid> Create(GoodsCreateModel model)
+        public async Task<Guid> Create(Goods model)
         {
             var createModel = _mapper.Map<Goods>(model);
             _context.Goods.Add(createModel);
@@ -70,7 +69,7 @@ namespace HomeApplianceStore.Domain.Services
         }
         
         /// <inheritdoc />
-        public async Task<Guid> Update(GoodsUpdateModel model)
+        public async Task<Guid> Update(Goods model)
         {
             var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == model.Guid);
             goods.Availability = model.Availability;
@@ -78,7 +77,7 @@ namespace HomeApplianceStore.Domain.Services
             goods.Manufacturer = model.Manufacturer;
             goods.Price = model.Price;
             goods.Quantity = model.Quantity;
-            goods.Specifications = _mapper.Map<Specifications>(model.Specifications); //= model.Specifications;
+            goods.Specifications = model.Specifications;
             goods.Type = model.Type;
             goods.AssemblyPlace = model.AssemblyPlace;
             _context.Goods.Update(goods);

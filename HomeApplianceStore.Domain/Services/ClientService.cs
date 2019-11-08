@@ -5,7 +5,6 @@ using AutoMapper;
 using HomeApplianceStore.Database;
 using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Interfaces;
-using HomeApplianceStore.Domain.Models.Client;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeApplianceStore.Domain.Services
@@ -25,21 +24,19 @@ namespace HomeApplianceStore.Domain.Services
         }
 
         /// <inheritdoc />
-        public async Task<List<ClientViewModel>> GetAll()
+        public async Task<List<Client>> GetAll()
         {
-            var clients = await _context.Clients.ToListAsync();
-            return _mapper.Map<List<Client>, List<ClientViewModel>>(clients);
+            return await _context.Clients.ToListAsync();
         }
 
         /// <inheritdoc />
-        public async Task<ClientViewModel> Get(Guid guid)
+        public async Task<Client> Get(Guid guid)
         {
-            var client = await _context.Clients.FirstOrDefaultAsync(a => a.Guid == guid);
-            return _mapper.Map<Client, ClientViewModel>(client);
+            return await _context.Clients.FirstOrDefaultAsync(a => a.Guid == guid);
         }
 
         /// <inheritdoc />
-        public async Task<Guid> Create(ClientCreateModel model)
+        public async Task<Guid> Create(Client model)
         {
             var createModel = _mapper.Map<Client>(model);
             _context.Clients.Add(createModel);
@@ -48,7 +45,7 @@ namespace HomeApplianceStore.Domain.Services
         }
 
         /// <inheritdoc />
-        public async Task<Guid> Update(ClientUpdateModel model)
+        public async Task<Guid> Update(Client model)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(a => a.Guid == model.Guid);
             client.Address = model.Address;
