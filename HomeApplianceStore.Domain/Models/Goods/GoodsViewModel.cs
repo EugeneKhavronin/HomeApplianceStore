@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using HomeApplianceStore.Database.Models;
+using HomeApplianceStore.Domain.Models.Specifications;
 
 namespace HomeApplianceStore.Domain.Models.Goods
 {
@@ -45,6 +46,6 @@ namespace HomeApplianceStore.Domain.Models.Goods
         /// <summary>
         /// Спецификации
         /// </summary>
-        public List<Specifications> Specifications { get; set; }
+        public List<SpecificationCreateModel> Specifications { get; set; }
     }
 }

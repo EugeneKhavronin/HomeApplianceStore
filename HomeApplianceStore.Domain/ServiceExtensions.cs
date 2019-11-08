@@ -8,8 +8,6 @@ namespace HomeApplianceStore.Domain
     {
         public static IServiceCollection AddDomain(this IServiceCollection services)
         {
-            services.AddScoped<IClientService, ClientService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IGoodsService, GoodsService>();
 
             return services;

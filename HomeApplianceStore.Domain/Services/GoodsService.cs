@@ -78,7 +78,7 @@ namespace HomeApplianceStore.Domain.Services
             goods.Manufacturer = model.Manufacturer;
             goods.Price = model.Price;
             goods.Quantity = model.Quantity;
-            goods.Specifications = model.Specifications;
+            goods.Specifications = _mapper.Map<Specifications>(model.Specifications); //= model.Specifications;
             goods.Type = model.Type;
             goods.AssemblyPlace = model.AssemblyPlace;
             _context.Goods.Update(goods);

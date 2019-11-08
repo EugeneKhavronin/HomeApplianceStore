@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HomeApplianceStore.Domain.Interfaces;
 using HomeApplianceStore.Domain.Models.Client;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeApplianceStore.API.Controllers

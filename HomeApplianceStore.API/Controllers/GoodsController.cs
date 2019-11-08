@@ -28,7 +28,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{type}/Type")]
-        public async Task<List<GoodsViewModel>> GetGoodsByType(string type)
+        public async Task<List<GoodsViewModel>> GetGoodsByType([FromRoute] string type)
         {
             return await _goodsService.GetAllByType(type);
         }
@@ -39,7 +39,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{manufacturer}/Manufacturer")]
-        public async Task<List<GoodsViewModel>> GetGoodsByManufacturer(string manufacturer)
+        public async Task<List<GoodsViewModel>> GetGoodsByManufacturer([FromRoute] string manufacturer)
         {
             return await _goodsService.GetAllByManufacturer(manufacturer);
         }
@@ -50,7 +50,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{specifications}/Specifications")]
-        public async Task<List<GoodsViewModel>> GetGoodsBySpecifications(List<Specifications> specifications)
+        public async Task<List<GoodsViewModel>> GetGoodsBySpecifications([FromBody]List<Specifications> specifications)
         {
             return await _goodsService.GetAllBySpecification(specifications);
         }

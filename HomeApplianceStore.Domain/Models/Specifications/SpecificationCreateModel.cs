@@ -1,19 +1,17 @@
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using HomeApplianceStore.Database.Models;
 
-namespace HomeApplianceStore.Database.Models
+namespace HomeApplianceStore.Domain.Models.Specifications
 {
     /// <summary>
-    /// Класс характеристик
+    /// Модель характеристики
     /// </summary>
-    public class Specifications
+    public class SpecificationCreateModel
     {
         /// <summary>
         /// Уникальный идентификатор
         /// </summary>
-        [Key]
-        public Guid Guid { get; set; }
+        private Guid Guid { get; set; }
         
         /// <summary>
         /// Название спецификации
@@ -23,12 +21,11 @@ namespace HomeApplianceStore.Database.Models
         /// <summary>
         /// Уникальный идентификатор значения
         /// </summary>
-        [ForeignKey("SpecificationValue")]
         public Guid ValueGuid { get; set; }
 
         /// <summary>
         /// Значение характеристики
         /// </summary>
-        public SpecificationValue SpecificationValue { get; set; }
+        public SpecificationValueCreateModel SpecificationValue { get; set; }
     }
 }

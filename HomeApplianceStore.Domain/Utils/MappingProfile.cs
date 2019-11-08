@@ -3,6 +3,7 @@ using AutoMapper;
 using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Models.Client;
 using HomeApplianceStore.Domain.Models.Goods;
+using HomeApplianceStore.Domain.Models.Specifications;
 
 namespace HomeApplianceStore.Domain.Utils
 {
@@ -26,6 +27,9 @@ namespace HomeApplianceStore.Domain.Utils
             CreateMap<GoodsViewModel, Goods>();
             CreateMap<GoodsCreateModel, Goods>();
             CreateMap<GoodsUpdateModel, Goods>();
+            
+            CreateMap<Specifications, SpecificationCreateModel>();
+            CreateMap<SpecificationCreateModel, Specifications>();
         }
     }
 }

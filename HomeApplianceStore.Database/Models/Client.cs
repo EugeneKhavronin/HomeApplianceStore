@@ -14,21 +14,6 @@ namespace HomeApplianceStore.Database.Models
         /// </summary>
         [Key]
         public Guid Guid { get; set; }
-        
-        /// <summary>
-        /// Роль пользователя
-        /// </summary>
-        public Guid RoleGuid { get; set; }
-        
-        /// <summary>
-        /// Логин
-        /// </summary>
-        public string Login { get; set; }
-
-        /// <summary>
-        /// Пароль
-        /// </summary>
-        public string Password { get; set; }
 
         /// <summary>
         /// ФИО
