@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using AutoMapper;
 using HomeApplianceStore.Database;
 using HomeApplianceStore.Domain;
-using HomeApplianceStore.Domain.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -54,9 +52,6 @@ namespace HomeApplianceStore.API
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
-
-            services.AddAutoMapper(config =>
-                Mapper.Initialize(b => { b.AddProfile(typeof(MappingProfile)); }));
 
             services.AddDomain();
             

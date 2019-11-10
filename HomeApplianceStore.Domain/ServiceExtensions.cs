@@ -9,7 +9,9 @@ namespace HomeApplianceStore.Domain
         public static IServiceCollection AddDomain(this IServiceCollection services)
         {
             services.AddScoped<IGoodsService, GoodsService>();
-
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IOrderService, OrderService>();
+            
             return services;
         }
     }

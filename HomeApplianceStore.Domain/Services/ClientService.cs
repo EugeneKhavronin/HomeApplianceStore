@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using HomeApplianceStore.Database;
 using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Interfaces;
@@ -14,12 +13,9 @@ namespace HomeApplianceStore.Domain.Services
     {
         private readonly DatabaseContext _context;
 
-        private readonly IMapper _mapper;
-
         /// <summary />
-        public ClientService(DatabaseContext context, IMapper mapper)
+        public ClientService(DatabaseContext context)
         {
-            _mapper = mapper;
             _context = context;
         }
 
@@ -38,10 +34,9 @@ namespace HomeApplianceStore.Domain.Services
         /// <inheritdoc />
         public async Task<Guid> Create(Client model)
         {
-            var createModel = _mapper.Map<Client>(model);
-            _context.Clients.Add(createModel);
+            _context.Clients.Add(model);
             await _context.SaveChangesAsync();
-            return createModel.Guid;
+            return model.Guid;
         }
 
         /// <inheritdoc />

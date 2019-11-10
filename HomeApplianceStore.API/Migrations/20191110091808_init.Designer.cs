@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HomeApplianceStore.API.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20191108102516_init")]
+    [Migration("20191110091808_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -33,7 +33,7 @@ namespace HomeApplianceStore.API.Controllers
         }
         
         /// <summary>
-        /// Получение товаров по заданному типу
+        /// Получение товаров по заданному производителю
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -44,12 +44,12 @@ namespace HomeApplianceStore.API.Controllers
         }
         
         /// <summary>
-        /// Получение товаров по заданному типу
+        /// Получение товаров по заданным спецификациям
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("{specifications}/Specifications")]
-        public async Task<List<Goods>> GetGoodsBySpecifications([FromBody]List<Specifications> specifications)
+        public async Task<List<Goods>> GetGoodsBySpecifications([FromRoute] string specifications)
         {
             return await _goodsService.GetAllBySpecification(specifications);
         }

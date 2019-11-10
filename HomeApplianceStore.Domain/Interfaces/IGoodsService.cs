@@ -29,7 +29,7 @@ namespace HomeApplianceStore.Domain.Interfaces
         /// </summary>
         /// <param name="specifications"></param>
         /// <returns></returns>
-        Task<List<Goods>> GetAllBySpecification(List<Specifications> specifications);
+        Task<List<Goods>> GetAllBySpecification(string specifications);
         
         /// <summary>
         /// Получение всех товаров

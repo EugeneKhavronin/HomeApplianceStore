@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Interfaces;
-using HomeApplianceStore.Domain.Models.Client;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeApplianceStore.API.Controllers
@@ -26,7 +26,7 @@ namespace HomeApplianceStore.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<ClientViewModel>> GetClients()
+        public async Task<List<Client>> GetClients()
         {
             return await _clientService.GetAll();
         }
@@ -37,7 +37,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
         [HttpGet("{guid}")]
-        public async Task<ClientViewModel> GetClient([FromRoute] Guid guid)
+        public async Task<Client> GetClient([FromRoute] Guid guid)
         {
             return await _clientService.Get(guid);
         }
@@ -48,7 +48,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="model">Модель клиента</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Guid> CreateClient([FromBody] ClientCreateModel model)
+        public async Task<Guid> CreateClient([FromBody] Client model)
         {
             return await _clientService.Create(model);
         }
@@ -59,7 +59,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="model">Модель клиента</param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<Guid> UpdateClient([FromBody] ClientUpdateModel model)
+        public async Task<Guid> UpdateClient([FromBody] Client model)
         {
             return await _clientService.Update(model);
         }
