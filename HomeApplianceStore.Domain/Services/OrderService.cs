@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeApplianceStore.Domain.Services
 {
+    /// <inheritdoc />
     public class OrderService : IOrderService
     {
         private readonly DatabaseContext _context;
@@ -18,16 +19,19 @@ namespace HomeApplianceStore.Domain.Services
             _context = context;
         }
 
+        /// <inheritdoc />
         public async Task<List<Order>> GetAll()
         {
             return await _context.Orders.ToListAsync();
         }
 
+        /// <inheritdoc />
         public async Task<Order> Get(Guid guid)
         {
             return await _context.Orders.FirstOrDefaultAsync(a => a.Guid == guid);
         }
 
+        /// <inheritdoc />
         public async Task<Guid> Create(Order model)
         {
             _context.Orders.Add(model);
@@ -35,6 +39,7 @@ namespace HomeApplianceStore.Domain.Services
             return model.Guid;
         }
 
+        /// <inheritdoc />
         public async Task<Guid> Update(Order model)
         {
             var order = await _context.Orders.FirstOrDefaultAsync(a => a.Guid == model.Guid);
@@ -50,6 +55,7 @@ namespace HomeApplianceStore.Domain.Services
             return order.Guid;
         }
 
+        /// <inheritdoc />
         public async Task Delete(Guid guid)
         {
             var order = await _context.Orders.FirstOrDefaultAsync(a => a.Guid == guid);

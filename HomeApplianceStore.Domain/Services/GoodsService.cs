@@ -31,25 +31,25 @@ namespace HomeApplianceStore.Domain.Services
         public async Task<List<Goods>> GetAllByManufacturer(string manufacturer)
         {
             
-            return await _context.Goods.Where(a=>a.Manufacturer==manufacturer).Include(a => a.Specifications).ToListAsync();
+            return await _context.Goods.Where(a=>a.Manufacturer==manufacturer).Include(a => a.Specifications).ThenInclude(a => a.SpecificationValue).ToListAsync();
         }
 
         //?????
         public async Task<List<Goods>> GetAllBySpecification(List<Specifications> specification)
         {
-            return await _context.Goods.Where(a => a.Specifications[0].SpecificationName == specification[0].SpecificationName).Include(a => a.Specifications).ToListAsync();
+            return await _context.Goods.Where(a => a.Specifications[0].SpecificationName == specification[0].SpecificationName).Include(a => a.Specifications).ThenInclude(a => a.SpecificationValue).ToListAsync();
         }
         
         /// <inheritdoc />
         public async Task<List<Goods>> GetAll()
         {
-            return await _context.Goods.Include(a => a.Specifications).ToListAsync();
+            return await _context.Goods.Include(a => a.Specifications).ThenInclude(a => a.SpecificationValue).ToListAsync();
         }
         
         /// <inheritdoc />
         public async Task<Goods> Get(Guid guid)
         {
-            return await _context.Goods.Include(a => a.Specifications).FirstOrDefaultAsync(a => a.Guid == guid);
+            return await _context.Goods.Include(a => a.Specifications).ThenInclude(a => a.SpecificationValue).FirstOrDefaultAsync(a => a.Guid == guid);
         }
         
         /// <inheritdoc />
@@ -81,11 +81,11 @@ namespace HomeApplianceStore.Domain.Services
         public async Task Delete(Guid guid)
         {
             var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid);
-            var asss = await _context.Specifications.FirstOrDefault(goodsGuid);
-            var 
-            _context.Goods.Remove(goods);
-            _context.Goods.Remove(goods);
-            _context.Goods.Remove(goods);
+            //var goodsSpec = await _context.Specifications.FirstOrDefaultAsync(a => a.Guid == );
+            //var goodsSpecValue = await _context.SpecificationValues.FirstOrDefaultAsync(a => a.Guid == )
+            //_context.Goods.Remove(goods);
+            //_context.Goods.Remove(goods);
+            //_context.Goods.Remove(goods);
             _context.Goods.Remove(goods);
             await _context.SaveChangesAsync();
         }
