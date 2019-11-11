@@ -49,7 +49,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{specifications}/Specifications")]
-        public async Task<List<Goods>> GetGoodsBySpecifications([FromRoute] string specifications)
+        public async Task<List<Goods>> GetGoodsBySpecifications([FromRoute] List<Specifications> specifications)
         {
             return await _goodsService.GetAllBySpecification(specifications);
         }

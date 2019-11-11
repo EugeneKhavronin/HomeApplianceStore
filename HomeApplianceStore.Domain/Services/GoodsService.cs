@@ -23,7 +23,7 @@ namespace HomeApplianceStore.Domain.Services
         /// <inheritdoc />
         public async Task<List<Goods>> GetAllByType(string type)
         {
-            var goods = await _context.Goods.Where(a => a.Type == type).Include(a => a.Specifications).ToListAsync();
+            var goods = await _context.Goods.Where(a => a.Type == type).Include(a => a.Specifications).ThenInclude(a => a.SpecificationValue).ToListAsync();
             return goods;
         }
         
@@ -35,21 +35,21 @@ namespace HomeApplianceStore.Domain.Services
         }
 
         //?????
-        public async Task<List<Goods>> GetAllBySpecification(string specification)
+        public async Task<List<Goods>> GetAllBySpecification(List<Specifications> specification)
         {
-            return await _context.Goods.Where(a => a.Specifications.ToString() == specification).Include(a => a.Specifications).ToListAsync();
+            return await _context.Goods.Where(a => a.Specifications[0].SpecificationName == specification[0].SpecificationName).Include(a => a.Specifications).ToListAsync();
         }
         
         /// <inheritdoc />
         public async Task<List<Goods>> GetAll()
         {
-            return await _context.Goods.ToListAsync();
+            return await _context.Goods.Include(a => a.Specifications).ToListAsync();
         }
         
         /// <inheritdoc />
         public async Task<Goods> Get(Guid guid)
         {
-            return await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid);
+            return await _context.Goods.Include(a => a.Specifications).FirstOrDefaultAsync(a => a.Guid == guid);
         }
         
         /// <inheritdoc />
@@ -81,6 +81,11 @@ namespace HomeApplianceStore.Domain.Services
         public async Task Delete(Guid guid)
         {
             var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid);
+            var asss = await _context.Specifications.FirstOrDefault(goodsGuid);
+            var 
+            _context.Goods.Remove(goods);
+            _context.Goods.Remove(goods);
+            _context.Goods.Remove(goods);
             _context.Goods.Remove(goods);
             await _context.SaveChangesAsync();
         }

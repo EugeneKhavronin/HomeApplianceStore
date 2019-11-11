@@ -53,6 +53,7 @@ namespace HomeApplianceStore.Domain.Services
             return client.Guid;
         }
 
+        //????
         /// <inheritdoc />
         public async Task Delete(Guid guid)
         {
