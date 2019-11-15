@@ -9,7 +9,7 @@ namespace HomeApplianceStore.API.Controllers
 {
     /// <summary>
     /// Контроллер товаров
-    /// </summary>
+    /// </summary>    
     [Route("api/goods")]
     public class GoodsController : Controller
     {
@@ -47,11 +47,11 @@ namespace HomeApplianceStore.API.Controllers
         /// Получение товаров по заданным спецификациям
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [Route("{specifications}/Specifications")]
-        public async Task<List<Goods>> GetGoodsBySpecifications([FromRoute] List<Specifications> specifications)
+        [HttpPost]
+        [Route("Specifications")]
+        public List<Goods> GetGoodsBySpecifications([FromBody]List<Specifications> specifications)
         {
-            return await _goodsService.GetAllBySpecification(specifications);
+            return _goodsService.GetAllBySpecification(specifications);
         }
         
         /// <summary>
@@ -103,7 +103,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task DeleteGoods([FromRoute] Guid guid)
+        public async Task DeleteGoods([FromBody] Guid guid)
         {
             await _goodsService.Delete(guid);
         }

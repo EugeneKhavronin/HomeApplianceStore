@@ -23,13 +23,13 @@ namespace HomeApplianceStore.Domain.Interfaces
         /// <param name="manufacturer"></param>
         /// <returns></returns>
         Task<List<Goods>> GetAllByManufacturer(string manufacturer);
-        
+
         /// <summary>
         /// Получение всех товаров с заданной характеристикой
         /// </summary>
         /// <param name="specifications"></param>
         /// <returns></returns>
-        Task<List<Goods>> GetAllBySpecification(List<Specifications> specifications);
+        List<Goods> GetAllBySpecification(List<Specifications> specification);
         
         /// <summary>
         /// Получение всех товаров

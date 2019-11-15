@@ -58,7 +58,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="order"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<Guid> UpdateOrder([FromBody] Order order)
+        public async Task<Guid> UpdateOrder([FromForm] Order order)
         {
             return await _orderService.Update(order);
         }
