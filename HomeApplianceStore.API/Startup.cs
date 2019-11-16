@@ -77,7 +77,6 @@ namespace HomeApplianceStore.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "HomeApplianceStore V1");
             });
             app.UseStaticFiles();
-            app.UseAuthentication();
             app.UseMvc();
         }
     }
