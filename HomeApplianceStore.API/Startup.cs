@@ -26,36 +26,24 @@ namespace HomeApplianceStore.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDomain();
             
             services.AddEntityFrameworkNpgsql().AddDbContext<DatabaseContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("HomeApplianceStore.API")));
             
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
                     {Title = "HomeApplianceStore", Version = "v1"});
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    In = "header",
-                    Description = "Введите токен и Bearer в поле",
-                    Name = "Authorization",
-                    Type = "apiKey"
-                });
-
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-                {
-                    {"Bearer", new string[] { }}
-                });
-                
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
 
-            services.AddDomain();
             
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,7 +58,7 @@ namespace HomeApplianceStore.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+            app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
