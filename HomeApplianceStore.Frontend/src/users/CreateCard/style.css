@@ -1,0 +1,22 @@
+.input-group-modal {
+    height: 130px;
+    width:300px;
+    display:flex;
+    flex-direction: column;
+    align-items:center ;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+.title {
+    margin-left:25px ;
+}
+.review{
+    margin-left:4px;
+    margin-top: 10px;
+}
+.text{
+    margin-left:24px;
+    margin-top: 10px;
+}
+.AddClose{
+    margin-right:44px;
+}
