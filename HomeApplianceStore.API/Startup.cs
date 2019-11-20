@@ -23,6 +23,7 @@ namespace HomeApplianceStore.API
 
         public IConfiguration Configuration { get; }
 
+        //"DefaultConnection": "Host=database;Port=5432;Username=postgres;Password=root;Database=HomeApplianceStoreDB"
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {

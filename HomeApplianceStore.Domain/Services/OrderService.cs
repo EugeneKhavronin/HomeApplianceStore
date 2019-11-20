@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HomeApplianceStore.Database;
 using HomeApplianceStore.Database.Models;
 using HomeApplianceStore.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeApplianceStore.Domain.Services
@@ -34,7 +36,13 @@ namespace HomeApplianceStore.Domain.Services
         /// <inheritdoc />
         public async Task<Guid> Create(Order model)
         {
+            _context.Entry(model).State = EntityState.Modified;
             _context.Orders.Add(model);
+            foreach (var guid in model.GoodsGuids)
+            {
+                var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid);
+                _context.Goods.Update(goods);
+            }
             await _context.SaveChangesAsync();
             return model.Guid;
         }
@@ -44,8 +52,6 @@ namespace HomeApplianceStore.Domain.Services
         {
             var order = await _context.Orders.FirstOrDefaultAsync(a => a.Guid == model.Guid);
             order.Guid = model.Guid;
-            order.Client = model.Client;
-            order.Goods = model.Goods;
             order.CurrentStatus = model.CurrentStatus;
             order.DeliveryTerms = model.DeliveryTerms;
             order.TotalCost = model.TotalCost;

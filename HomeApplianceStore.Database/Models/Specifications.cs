@@ -9,6 +9,11 @@ namespace HomeApplianceStore.Database.Models
     /// </summary>
     public class Specifications
     {
+        public Specifications()
+        {
+            SpecificationValue = new SpecificationValue();
+        }
+
         /// <summary>
         /// Уникальный идентификатор
         /// </summary>
@@ -25,6 +30,9 @@ namespace HomeApplianceStore.Database.Models
         /// </summary>
         [ForeignKey("SpecificationValue")]
         public Guid ValueGuid { get; set; }
+        
+        [ForeignKey("Goods")]
+        public Guid GoodsGuid { get; set; }
 
         /// <summary>
         /// Значение характеристики

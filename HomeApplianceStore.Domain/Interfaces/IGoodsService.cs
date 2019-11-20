@@ -63,6 +63,6 @@ namespace HomeApplianceStore.Domain.Interfaces
         /// </summary>
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
-        Task Delete(Guid guid);
+        Task Delete(Guid guid, Guid guidSpec, Guid guidValue);
     }
 }

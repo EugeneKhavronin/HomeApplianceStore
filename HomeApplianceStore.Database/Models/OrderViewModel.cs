@@ -5,19 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeApplianceStore.Database.Models
 {
-    /// <summary>
-    /// Класс заказа
-    /// </summary>
-    public class Order
+    public class OrderViewModel
     {
-        public Order()
-        {
-        }
-
         /// <summary>
         /// Уникальный идентификатор
         /// </summary>
-        [Key]
         public Guid Guid { get; set; }
 
         /// <summary>
@@ -43,14 +35,16 @@ namespace HomeApplianceStore.Database.Models
         /// <summary>
         /// Идентификатор клиента
         /// </summary>
-        [ForeignKey("Client")]
         public Guid ClientGuid { get; set; }
         
         /// <summary>
         /// Список уникальных идентификаторов товаров
         /// </summary>
         public List<Guid> GoodsGuids { get; set; }
-
-
+        
+        /// <summary>
+        /// Список товаров
+        /// </summary>
+        public List<Goods> Goods { get; set; }
     }
 }

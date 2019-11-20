@@ -46,7 +46,7 @@ namespace HomeApplianceStore.Domain.Services
             var lol = kek
                 .Include(a => a.Specifications)
                 .ThenInclude(a => a.SpecificationValue);
-            
+
             var lolkek = lol.ToList();
 
             return lolkek;
@@ -78,13 +78,16 @@ namespace HomeApplianceStore.Domain.Services
         /// <inheritdoc />
         public async Task<Guid> Update(Goods model)
         {
-            var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == model.Guid);
+            var goods = await _context.Goods.Include(a => a.Specifications)
+                .ThenInclude(a => a.SpecificationValue).FirstOrDefaultAsync(a => a.Guid == model.Guid);
+            goods.OrderGuid = model.OrderGuid;
             goods.Availability = model.Availability;
             goods.Guid = model.Guid;
             goods.Manufacturer = model.Manufacturer;
             goods.Price = model.Price;
             goods.Quantity = model.Quantity;
-            goods.Specifications = model.Specifications;
+            _context.Entry(goods).State = EntityState.Modified;
+            //goods.Specifications = model.Specifications;
             goods.Type = model.Type;
             goods.AssemblyPlace = model.AssemblyPlace;
             _context.Goods.Update(goods);
@@ -94,14 +97,11 @@ namespace HomeApplianceStore.Domain.Services
 
         //??????
         /// <inheritdoc />
-        public async Task Delete(Guid guid)
+        public async Task Delete(Guid guid, Guid guidSpec, Guid guidValue)
         {
             var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid);
-            var goodsSpec =
-                await _context.Specifications.FirstOrDefaultAsync(a => a.Guid == goods.Specifications[0].Guid);
-            var goodsSpecValue =
-                await _context.SpecificationValues.FirstOrDefaultAsync(a =>
-                    a.Guid == goods.Specifications[0].SpecificationValue.Guid);
+            var goodsSpec = await _context.Specifications.FirstOrDefaultAsync(a => a.Guid == guidSpec);
+            var goodsSpecValue = await _context.SpecificationValues.FirstOrDefaultAsync(a => a.Guid == guidValue);
             _context.SpecificationValues.Remove(goodsSpecValue);
             _context.Specifications.Remove(goodsSpec);
             _context.Goods.Remove(goods);

@@ -34,9 +34,9 @@ namespace HomeApplianceStore.Database.Models
         /// E-mail
         /// </summary>
         public string Email { get; set; }
-
+        
         /// <summary>
-        /// Заказы
+        /// Список заказов
         /// </summary>
         public List<Order> Orders { get; set; }
     }

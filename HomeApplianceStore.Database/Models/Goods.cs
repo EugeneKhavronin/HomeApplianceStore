@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HomeApplianceStore.Database.Models
 {
@@ -9,6 +11,11 @@ namespace HomeApplianceStore.Database.Models
     /// </summary>
     public class Goods
     {
+        public Goods()
+        {
+            Specifications = new List<Specifications>();
+        }
+
         /// <summary>
         /// Уникальный идентификатор
         /// </summary>
@@ -49,5 +56,8 @@ namespace HomeApplianceStore.Database.Models
         /// Спецификации
         /// </summary>
         public List<Specifications> Specifications { get; set; }
+        
+        [ForeignKey("Order")]
+        public Guid? OrderGuid { get; set; }
     }
 }

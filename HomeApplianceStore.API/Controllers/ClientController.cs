@@ -70,7 +70,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task DeleteClient([FromBody] Guid guid)
+        public async Task DeleteClient([FromQuery] Guid guid)
         {
             await _clientService.Delete(guid);
         }

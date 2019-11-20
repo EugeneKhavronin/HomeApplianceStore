@@ -22,16 +22,13 @@ namespace HomeApplianceStore.Domain.Services
         /// <inheritdoc />
         public async Task<List<Client>> GetAll()
         {
-            return await _context.Clients.Include(a => a.Orders).ThenInclude(a => a.Goods)
-                .ThenInclude(a => a.Specifications).ThenInclude(a => a.SpecificationValue).ToListAsync();
+            return await _context.Clients.ToListAsync();
         }
 
         /// <inheritdoc />
         public async Task<Client> Get(Guid guid)
         {
-            return await _context.Clients.Include(a => a.Orders).ThenInclude(a => a.Goods)
-                .ThenInclude(a => a.Specifications).ThenInclude(a => a.SpecificationValue)
-                .FirstOrDefaultAsync(a => a.Guid == guid);
+            return await _context.Clients.FirstOrDefaultAsync(a => a.Guid == guid);
         }
 
         /// <inheritdoc />
@@ -48,21 +45,18 @@ namespace HomeApplianceStore.Domain.Services
             var client = await _context.Clients.FirstOrDefaultAsync(a => a.Guid == model.Guid);
             client.Address = model.Address;
             client.Email = model.Email;
-            client.Orders = model.Orders;
             client.FullName = model.FullName;
             client.PhoneNumber = model.PhoneNumber;
+            client.Orders = model.Orders;
             _context.Clients.Update(client);
             await _context.SaveChangesAsync();
             return client.Guid;
         }
-
-        //????
+        
         /// <inheritdoc />
         public async Task Delete(Guid guid)
         {
-            var order = await _context.Orders.FirstOrDefaultAsync(a => a.Client.Guid == guid);
             var client = await _context.Clients.FirstOrDefaultAsync(a => a.Guid == guid);
-            _context.Orders.Remove(order);
             _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
         }

@@ -103,9 +103,9 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task DeleteGoods([FromBody] Guid guid)
+        public async Task DeleteGoods([FromBody] Guid guid, Guid guidSpec, Guid guidValue)
         {
-            await _goodsService.Delete(guid);
+            await _goodsService.Delete(guid, guidSpec, guidValue);
         }
     }
 }

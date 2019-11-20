@@ -13,11 +13,8 @@ namespace HomeApplianceStore.Database
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<Goods> Goods { get; set; }
-
         public DbSet<Order> Orders { get; set; }
-
         public DbSet<Specifications> Specifications { get; set; }
-        
         public DbSet<SpecificationValue> SpecificationValues { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
