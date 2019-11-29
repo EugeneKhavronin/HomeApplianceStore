@@ -14,7 +14,7 @@ namespace HomeApplianceStore.Domain.Interfaces
         /// Получение всех заказов
         /// </summary>
         /// <returns></returns>
-        Task<List<Order>> GetAll();
+        Task<List<OrderViewModel>> GetAll();
         
         /// <summary>
         /// Получение заказа
