@@ -9,6 +9,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS_SUCCESS:
+      console.log('action.payload', action.payload);
       return { data: action.payload };
 
     case ADD_PRODUCTS_SUCCESS:

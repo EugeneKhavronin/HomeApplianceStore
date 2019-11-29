@@ -10,10 +10,13 @@ export const ADD_USERS_SUCCESS = 'ADD_USERS_SUCCESS';
 
 export const deleteUsers = (guid) => ({ type: DELETE_USERS_SUCCESS, payload: guid });
 
-export const getUsers = (users) => ({
-  type: 'GET_USERS_SUCCESS',
-  payload: users,
-});
+export const getUsers = (users) => {
+  console.log('users', users);
+ return{  type: 'GET_USERS_SUCCESS',
+   payload: users,
+ }
+
+};
 export const editUsers = (users) => ({
   type: 'EDIT_USERS_SUCCESS',
   payload: users,

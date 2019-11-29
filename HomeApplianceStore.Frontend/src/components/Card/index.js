@@ -39,29 +39,41 @@ const useStyles = makeStyles({
 });
 
 export default function MediaCard({
-guid, title, proizvoditel, model, moshnost, haracteristiki, cost, delProducts, handleClickOpenM, handleClickOpenE,
+guid,  type, price, manufacturer, assemblyPlace, quantity, value, specificationName, delProducts, handleClickOpenM, handleClickOpenE,
 }) {
   const classes = useStyles();
-
+console.log('value',value);
   return (
     <Card className={classes.card}>
       <>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            тип товара:
-            {title}
+            type:
+            {type}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            модель:
-            {model}
+            price:
+            { price}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            производитель:
-            {proizvoditel}
+            manufacturer:
+            {manufacturer}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            цена:
-            {cost}
+            quantity:
+            {quantity}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            assemblyPlace:
+            {assemblyPlace}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            specificationName:
+            {specificationName}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            value:
+            {value}
           </Typography>
         </CardContent>
       </>

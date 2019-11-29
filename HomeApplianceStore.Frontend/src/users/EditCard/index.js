@@ -18,31 +18,23 @@ const CreateCard = ({ onSubmit, handleClose, initialValues }) => {
                 <DialogContent className="input-group-modal">
                     <div>
                         <label>Имя:</label>
-                        <Field required name="name" component="input" type="text" className="title" />
+                        <Field required name="fullName" component="input" type="text" className="title" />
                     </div>
                     <div>
                         <label>  Фамилия:</label>
-                        <Field required name="surname" component="input" type="text" className="proizvoditel" />
+                        <Field required name="email" component="input" type="text" className="proizvoditel" />
                     </div>
-                    <div>
-                        <label>Отчество:</label>
-                        <Field required name="patronymic" component="input" type="textarea" className="model" />
-                    </div>
-                    <div>
+                     <div>
                         <label>Адресс:</label>
-                        <Field required name="adress" component="input" type="textarea" className="text" />
-                    </div>
-                    <div>
-                        <label>почта:</label>
-                        <Field required name="email" component="input" type="textarea" className="text" />
+                        <Field required name="address" component="input" type="textarea" className="text" />
                     </div>
                     <div>
                         <label>номер:</label>
-                        <Field required name="phone" component="input" type="textarea" className="text" />
+                        <Field required name="phoneNumber" component="input" type="textarea" className="text" />
                     </div>
                     <div>
                         <label>заказы:</label>
-                        <Field required name="orders" component="input" type="textarea" className="text" />
+                        <Field  name="orders" component="input" type="textarea" className="text" />
                     </div>
                 </DialogContent>
                 <DialogActions className="AddClose">

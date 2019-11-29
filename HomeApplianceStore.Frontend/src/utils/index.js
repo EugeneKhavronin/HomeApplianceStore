@@ -12,8 +12,23 @@ export default function generationGuid() {
 export const getClient = axios.get(`${URL}/api/client`);
 
 export const createClient = values => axios.post(`${URL}/api/client`, values);
-export const editClient = values => axios.put(`${URL}/api/client/${values.guid}`, values);
+export const editClient = values => {console.log('putvalues',values);
+return(axios.put(`${URL}/api/client`, values));
+};
+
 
 export const removeClient= guid =>
     axios.delete(`${URL}/api/client?guid=${guid}`);
 
+
+export const getGoods  = axios.get(`${URL}/api/goods`);
+
+export const createGoods = values => axios.post(`${URL}/api/goods`, values);
+
+export const editGoods  = values => {console.log('putvalues',values);
+    return(axios.put(`${URL}/api/goods`, values));
+};
+
+
+export const removeGoods = guid =>
+    axios.delete(`${URL}/api/goods?guid=${guid}`);

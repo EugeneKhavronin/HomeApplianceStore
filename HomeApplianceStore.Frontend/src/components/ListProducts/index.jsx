@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import { products } from '../../database';
+import {getGoods, createGoods, removeGoods, editGoods, editClient, removeClient, createClient} from '../../utils';
 import Card from '../Card';
 import EditCard from '../EditCard';
 import {
@@ -51,17 +51,24 @@ class ListProducts extends Component {
     console.log('values', values);
     editProducts(values);
     this.setState({ isOpenEdit: false });
+    editGoods(values).then(values=> {
+      console.log('editClient', values);
+
+    });
   };
 
 
   componentDidMount() {
     const { getProducts } = this.props;
-
-    getProducts(products);
+    getGoods.then(res => {
+      console.log('reqweqs432', res.data);
+      getProducts(res.data);
+    });
   }
 
   delProducts=(guid) => {
     this.props.DeleteProducts(guid);
+    removeGoods(guid);
   };
 
   handleClickOpenAdd = () => this.setState({ isOpenAdd: true });
@@ -70,16 +77,45 @@ class ListProducts extends Component {
 
   handleSubmitAddProductsAdd = (values) => {
     const { addProducts } = this.props;
+    console.log("valuesAddProduct",values);
+  const guid={guid:'0f9619ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`};
+  console.log('guid',guid);
+    const specifications = {
+      specifications: [
+        {guid: '1f9619ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`,
+          specificationName:values.specificationName,
+          valueGuid:'2f9619ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`,
+          goodsGuid:'3f9619ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`,
+          specificationValue:{
+            guid:'4f9619ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`,
+            specificationGuid: '5f9619ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`,
+            value: values.value
+          }}
+      ],
+      orderGuid: '6f9619ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`
+    };
+    const price={price: values.price/1};
+    const quantity={quantity: values.quantity/1};
+    delete values['quantity'];
+    delete values['specificationName'];
+    delete values['value'];
+    delete values['price'];
+    Object.assign(values, specifications,guid,price,quantity);
+    console.log("valuesAddProduct1",values);
 
-    addProducts(values);
     this.setState({ isOpenAdd: false });
+    createGoods(values);
+    const specificationName={specificationName:values.specificationName};
+    const value={value:values.value};
+    Object.assign(values, value,specificationName);
+    addProducts(values);
   };
 
   render() {
     const { data } = this.props.products;
-
+console.log('data',data);
     const {
-      guid, title, proizvoditel, model, moshnost, haracteristiki, cost,
+      guid, type, price, manufacturer, assemblyPlace, availability, quantity,specifications
     } = this.state.currentProducts;
 
     const {
@@ -89,19 +125,19 @@ class ListProducts extends Component {
 
       <div className="AllCard">
         {data.map(({
-          guid, title, proizvoditel, model, moshnost, haracteristiki, cost,
+                     guid, type, price, manufacturer, assemblyPlace, quantity, specifications,
         }) => (
           <Card
             id="card"
             key={guid}
-            title={title}
-            proizvoditel={proizvoditel}
-            model={model}
-            moshnost={moshnost}
-            haracteristiki={haracteristiki}
-            cost={cost}
-
+            type={type}
+            price={price}
+            manufacturer={manufacturer}
+            assemblyPlace={assemblyPlace}
+            quantity={quantity}
             guid={guid}
+            specificationName={specifications[0].specificationName}
+            value={specifications[0].specificationValue.value}
             delProducts={this.delProducts}
             handleClickOpenE={this.handleClickOpenEdit}
             handleClickOpenM={this.handleClickOpenInfo}
@@ -117,28 +153,36 @@ class ListProducts extends Component {
 
         <Modal isOpen={isOpenMore} handleClose={this.handleOnCloseInfo} id="modal">
           <DialogTitle>
-            тип товара
+            type
             {' '}
-            {title}
+            {type}
           </DialogTitle>
           <DialogContent style={{ width: 200, marginBottom: 15 }}>
             <Typography variant="body2" color="textSecondary" component="p">
-             производитель
+              price
               {' '}
-              {proizvoditel}
+              {price}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              цена:
-              {cost}
+              manufacturer:
+              {manufacturer}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-                 характеристики:
-              {haracteristiki}
+              assemblyPlace:
+              {assemblyPlace}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-                  модель:
-              {model}
+              availability:
+              {availability}
             </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              quantity:
+              { quantity}
+            </Typography>
+            {/*<Typography variant="body2" color="textSecondary" component="p">*/}
+            {/*  /!*{specifications[0].specificationName}*!/*/}
+            {/*  {specifications.specificationValue.value}*/}
+            {/*</Typography>*/}
           </DialogContent>
           <Button onClick={this.handleOnCloseInfo} color="primary" autoFocus>
               Close

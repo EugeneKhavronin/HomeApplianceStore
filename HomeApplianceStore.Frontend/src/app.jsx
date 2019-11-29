@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 import {
   BrowserRouter as Router, Switch, Route, Link,
@@ -23,17 +24,18 @@ export default class App extends Component {
           <Router>
             <div>
               <nav>
-                <ul>
-                  <li>
-                    <Link to="/admin">admin</Link>
-                  </li>
-                  <li>
-                    <Link to="/users">users</Link>
-                  </li>
-                  <li>
-                    <Link to="/buyer">buyer</Link>
-                  </li>
-                </ul>
+                <Button variant="contained" color="primary" className="linkAdmin">
+                  <Link to="/admin" style={{ textDecoration: 'none', color:'white'}} >admin</Link>
+                </Button>
+                <Button variant="contained" color="primary" className="linkUsers">
+                  <Link to="/users" style={{ textDecoration: 'none',color:'white'}} >users</Link>
+                </Button>
+                <Button variant="contained" color="primary" className="linkClient">
+                  <Link to="/client" style={{ textDecoration: 'none', color:'white'}} >buyer</Link>
+                </Button>
+
+
+
               </nav>
 
               {/* A <Switch> looks through its children <Route>s and
@@ -45,7 +47,7 @@ export default class App extends Component {
                 <Route path="/users">
                   <ListUsers />
                 </Route>
-                <Route path="/buyer">
+                <Route path="/client">
                   <Buyer/>
                 </Route>
               </Switch>

@@ -14,28 +14,24 @@ const CreateCard = ({ onSubmit, handleClose }) => (
       <form onSubmit={handleSubmit}>
         <DialogContent className="input-group-modal">
             <div>
-            <label>title:</label>
-            <Field required name="title" component="input" type="text" className="title" />
+            <label>fullName:</label>
+            <Field required name="fullName" component="input" type="text" className="title" />
           </div>
           <div>
             <label>производитель:</label>
-            <Field required name="proizvoditel" component="input" type="text" className="review" />
+            <Field required name="email" component="input" type="text" className="review" />
           </div>
           <div>
-            <label>модель:</label>
-            <Field required name="model" component="input" type="textarea" className="text" />
+            <label>email:</label>
+            <Field required name="address" component="input" type="textarea" className="text" />
           </div>
           <div>
-            <label>мощность:</label>
-            <Field required name="moshnost" component="input" type="textarea" className="text" />
+            <label>phoneNumber:</label>
+            <Field required name="phoneNumber" component="input" type="textarea" className="text" />
           </div>
           <div>
-            <label>характеристики:</label>
-            <Field required name=" haracteristiki" component="input" type="textarea" className="text" />
-          </div>
-          <div>
-            <label>стоимость:</label>
-            <Field required name="cost" component="input" type="textarea" className="text" />
+            <label>orders:</label>
+            <Field  name=" orders" component="input" type="textarea" className="text" />
           </div>
         </DialogContent>
         <DialogActions className="AddClose">

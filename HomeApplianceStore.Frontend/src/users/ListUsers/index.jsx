@@ -6,7 +6,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import { users } from '../../database';
 import Card from '../Card';
 import EditCard from '../EditCard';
 import {
@@ -46,23 +45,27 @@ class ListUsers extends Component {
 
   handleSubmitEditUsers = (values) => {
     const { editUsers } = this.props;
-
-    console.log('values', values);
+    console.log('editClient', values);
     editUsers(values);
-    this.setState({ isOpenEdit: false });
+    this.setState({isOpenEdit: false})
+    editClient(values).then(values=> {
+      console.log('editClient', values);
+
+    });
   };
 
 
   componentDidMount() {
     const { getUsers } = this.props;
     getClient.then(res => {
-    console.log("asdasdasdasdasdadasda", res);
+      console.log('reqweqs432', res.data);
+      getUsers(res.data);
     });
-    getUsers(users);
   }
 
   delUsers=(guid) => {
-    this.props.DeleteUsers(guid);
+        this.props.DeleteUsers(guid);
+    removeClient(guid);
   };
 
   handleClickOpenAdd = () => this.setState({ isOpenAdd: true });
@@ -71,16 +74,19 @@ class ListUsers extends Component {
 
   handleSubmitAddUsersAdd = (values) => {
     const { addUsers } = this.props;
-
     addUsers(values);
-    this.setState({ isOpenAdd: false });
+    this.setState({isOpenAdd: false});
+    createClient(values).then(values=> {
+      console.log("values",values);
+
+    })
   };
 
   render() {
     const { data } = this.props.users;
-
+  console.log('this.props.users',this.props.users);
     const {
-      guid,  name, surname, patronymic, email, adress, phone, orders,
+      guid,  fullName, email, address, phoneNumber, orders,
     } = this.state.currentUsers;
 
     const {
@@ -91,26 +97,23 @@ class ListUsers extends Component {
 
       <div className="AllCard">
         {data.map(({
-          guid, name, surname, patronymic, email, adress, phone, orders,
+                     guid,  fullName, email, address, phoneNumber, orders,
         }) => (
           <Card
             id="card"
             key={guid}
-            name={name}
-            surname={surname}
-            patronymic={patronymic}
+            fullName={fullName}
             email={email}
-            adress={adress}
-            phone={phone}
+            address={address}
+            phoneNumber={phoneNumber}
             orders={orders}
-
             guid={guid}
             delUsers={this.delUsers}
             handleClickOpenE={this.handleClickOpenEdit}
             handleClickOpenM={this.handleClickOpenInfo}
           />
         ))}
-        <Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit}>
+        <Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit} style={{ height: 800, marginBottom: 15 }}>
           <EditCard
             initialValues={currentUsers}
             handleClose={this.handleOnCloseEdit}
@@ -118,33 +121,24 @@ class ListUsers extends Component {
           />
         </Modal>
 
-        <Modal isOpen={isOpenMore} handleClose={this.handleOnCloseInfo} id="modal">
+        <Modal isOpen={isOpenMore} handleClose={this.handleOnCloseInfo} id="modal" >
           <DialogTitle>
-            Имя
+            ФИО
             {' '}
-            {name}
+            {fullName}
           </DialogTitle>
           <DialogContent style={{ width: 200, marginBottom: 15 }}>
-            <Typography variant="body2" color="textSecondary" component="p">
-            Фамилия
-              {' '}
-              {surname}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              отчество:
-              {patronymic}
-            </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
                  почта:
               { email}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
                   адресс:
-              {adress}
+              {address}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               телефон:
-              {phone}
+              {phoneNumber}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               заказы:
@@ -156,15 +150,15 @@ class ListUsers extends Component {
           </Button>
         </Modal>
         <div>
-
           <Button
             type="button"
             className="button-add"
             onClick={this.handleClickOpenAdd}
+            color="primary"
           >
             Добавление пользователей
           </Button>
-          <Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd}>
+          <Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd} style={{ height: 800, marginBottom: 15 }}>
             <CreateCard
               onSubmit={this.handleSubmitAddUsersAdd}
               handleClose={this.handleOnCloseAdd}
@@ -172,7 +166,7 @@ class ListUsers extends Component {
           </Dialog>
         </div>
       </div>
-    );
+    )
   }
 }
 

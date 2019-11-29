@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 });
 
 export default function MediaCard({
-guid, name, surname, patronymic, email, adress, phone, orders, delUsers, handleClickOpenM, handleClickOpenE,
+                                    guid,  fullName, email, address, phoneNumber, orders, delUsers, handleClickOpenM, handleClickOpenE,
 }) {
   const classes = useStyles();
 
@@ -51,20 +51,10 @@ guid, name, surname, patronymic, email, adress, phone, orders, delUsers, handleC
       <>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Имя
+            ФИО
             {' '}
-            {name}
+            {fullName}
           </Typography>
-
-            <Typography variant="body2" color="textSecondary" component="p">
-              Фамилия
-              {' '}
-              {surname}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              отчество:
-              {patronymic}
-            </Typography>
         </CardContent>
       </>
       <CardActions className={classes.cardAction}>

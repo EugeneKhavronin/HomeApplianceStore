@@ -3,10 +3,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.jsx',
+  mode: 'development',
+  entry: {
+    main: path.resolve(__dirname, 'src', 'index.jsx'),
+  },
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '..', 'HomeApplianceStore.API', 'wwwroot'),
     filename: 'index-bundle.js',
+    publicPath: '/',
   },
   resolve: {
     extensions: [' ', '.js', '.jsx'],

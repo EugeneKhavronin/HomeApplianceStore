@@ -21,6 +21,6 @@ export const editProducts = (products) => ({
 export const addProducts = (products) => {
   return {
     type: 'ADD_PRODUCTS_SUCCESS',
-    payload: { ...products, photo: '', guid: generationGuid() },
+    payload: products,
   };
 };
