@@ -36,6 +36,7 @@ namespace HomeApplianceStore.Domain.Services
                     });
                 var orderViewModel = new OrderViewModel
                 {
+                    guid = order.Guid,
                     ClientGuid = order.ClientGuid,
                     CurrentStatus = order.CurrentStatus,
                     DateTimeOrder = order.DateTimeOrder,
@@ -45,36 +46,14 @@ namespace HomeApplianceStore.Domain.Services
                 };
                 viewModel.Add(orderViewModel);
             }
-            
-            
-                
-//            List<OrderViewModel> viewModel = new List<OrderViewModel>();
-//            foreach (var order in orders)
-//            {
-//                foreach (var orderViewModel in viewModel)
-//                {
-//                    orderViewModel.Guid = order.Guid;
-//                    orderViewModel.ClientGuid = order.ClientGuid;
-//                    orderViewModel.CurrentStatus = order.CurrentStatus;
-//                    orderViewModel.DeliveryTerms = order.CurrentStatus;
-//                    orderViewModel.GoodsGuids = order.GoodsGuids;
-//                    orderViewModel.TotalCost = order.TotalCost;
-//                    orderViewModel.DateTimeOrder = order.DateTimeOrder;
-//                    foreach (var guid in order.GoodsGuids)
-//                    {
-//                        var a = await _context.Goods.FindAsync(guid);
-//                        orderViewModel.Goods.Add(a);
-//                    }
-//                    viewModel.Add(orderViewModel);
-//                }
-//            }
             return viewModel;
         }
 
         /// <inheritdoc />
         public async Task<Order> Get(Guid guid)
         {
-            return await _context.Orders.FirstOrDefaultAsync(a => a.Guid == guid);
+            var order = await _context.Orders.FirstOrDefaultAsync(a => a.Guid == guid);
+            return order;
         }
 
         /// <inheritdoc />
