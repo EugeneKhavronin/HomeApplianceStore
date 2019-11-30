@@ -22,9 +22,53 @@ namespace HomeApplianceStore.Domain.Services
         }
 
         /// <inheritdoc />
-        public async Task<List<Order>> GetAll()
+        public async Task<List<OrderViewModel>> GetAll()
         {
-            return await _context.Orders.ToListAsync();
+            var orders = await _context.Orders.ToListAsync();
+            List<OrderViewModel> viewModel = new List<OrderViewModel>();
+            foreach (var order in orders)
+            {
+                List<Goods> goods = new List<Goods>();
+                _context.Orders.Select(a => a.GoodsGuids).FirstOrDefault()
+                    ?.ForEach(async guid =>
+                    {
+                        goods.Add(await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid));
+                    });
+                var orderViewModel = new OrderViewModel
+                {
+                    ClientGuid = order.ClientGuid,
+                    CurrentStatus = order.CurrentStatus,
+                    DateTimeOrder = order.DateTimeOrder,
+                    DeliveryTerms = order.DeliveryTerms,
+                    Goods = goods,
+                    TotalCost = order.TotalCost
+                };
+                viewModel.Add(orderViewModel);
+            }
+            
+            
+                
+//            List<OrderViewModel> viewModel = new List<OrderViewModel>();
+//            foreach (var order in orders)
+//            {
+//                foreach (var orderViewModel in viewModel)
+//                {
+//                    orderViewModel.Guid = order.Guid;
+//                    orderViewModel.ClientGuid = order.ClientGuid;
+//                    orderViewModel.CurrentStatus = order.CurrentStatus;
+//                    orderViewModel.DeliveryTerms = order.CurrentStatus;
+//                    orderViewModel.GoodsGuids = order.GoodsGuids;
+//                    orderViewModel.TotalCost = order.TotalCost;
+//                    orderViewModel.DateTimeOrder = order.DateTimeOrder;
+//                    foreach (var guid in order.GoodsGuids)
+//                    {
+//                        var a = await _context.Goods.FindAsync(guid);
+//                        orderViewModel.Goods.Add(a);
+//                    }
+//                    viewModel.Add(orderViewModel);
+//                }
+//            }
+            return viewModel;
         }
 
         /// <inheritdoc />

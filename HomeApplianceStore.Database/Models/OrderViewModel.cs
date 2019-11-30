@@ -8,11 +8,6 @@ namespace HomeApplianceStore.Database.Models
     public class OrderViewModel
     {
         /// <summary>
-        /// Уникальный идентификатор
-        /// </summary>
-        public Guid Guid { get; set; }
-
-        /// <summary>
         /// Дата и время
         /// </summary>
         public DateTime DateTimeOrder { get; set; }
@@ -36,12 +31,7 @@ namespace HomeApplianceStore.Database.Models
         /// Идентификатор клиента
         /// </summary>
         public Guid ClientGuid { get; set; }
-        
-        /// <summary>
-        /// Список уникальных идентификаторов товаров
-        /// </summary>
-        public List<Guid> GoodsGuids { get; set; }
-        
+
         /// <summary>
         /// Список товаров
         /// </summary>
