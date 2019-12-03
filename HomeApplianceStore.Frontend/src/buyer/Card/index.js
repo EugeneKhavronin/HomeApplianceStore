@@ -39,37 +39,52 @@ const useStyles = makeStyles({
 });
 
 export default function MediaCard({
-guid, title, proizvoditel, model, moshnost, haracteristiki, cost, delProducts, handleClickOpenM, handleClickOpenE,
+                                    guid,  type, price, manufacturer, assemblyPlace, quantity, value, specificationName,AddToBasket
 }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
-      <>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            тип товара:
-            {title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            модель:
-            {model}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            производитель:
-            {proizvoditel}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            цена:
-            {cost}
-          </Typography>
-        </CardContent>
-      </>
-      <CardActions className={classes.cardAction}>
-        <Button size="small" color="primary" onClick={() => handleClickOpenM(guid)} className={classes.info}>
-          information
-        </Button>
-      </CardActions>
-    </Card>
+      <Card className={classes.card}>
+        <>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              type:
+              {type}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              price:
+              { price}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              manufacturer:
+              {manufacturer}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              quantity:
+              {quantity}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              assemblyPlace:
+              {assemblyPlace}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              specificationName:
+              {specificationName}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              value:
+              {value}
+            </Typography>
+          </CardContent>
+        </>
+        <CardActions className={classes.cardAction}>
+
+          <div>
+            <Fab aria-label="Edit" className={classes.fab} onClick={() =>AddToBasket(guid, type, price, manufacturer, assemblyPlace, quantity, value, specificationName)}>
+             Buy
+            </Fab>
+          </div>
+        </CardActions>
+      </Card>
   );
 }

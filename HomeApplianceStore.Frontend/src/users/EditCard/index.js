@@ -9,7 +9,8 @@ import Typography from "@material-ui/core/Typography";
 
 const CreateCard = ({ onSubmit, handleClose, initialValues }) => {
     console.log('initialValues', initialValues);
-    return(<Form
+    return(
+        <Form
         onSubmit={onSubmit}
         initialValues={initialValues}
         render={({ handleSubmit }) => (

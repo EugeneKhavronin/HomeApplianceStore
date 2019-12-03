@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { makeStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
+import {getGoods, createGoods, removeGoods, editGoods, editClient, removeClient, createClient} from '../../utils';
 import { products } from '../../database';
 import Card from '../Card';
 import EditCard from '../EditCard';
@@ -17,16 +17,33 @@ import Modal from '../Modal';
 import './style.css';
 import Dialog from '@material-ui/core/Dialog';
 import CreateCard from '../CreateCard';
+import Fab from "@material-ui/core/Fab";
 
-
+const useStyles = makeStyles(theme => ({
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: 'auto',
+        width: 'fit-content',
+    },
+    formControl: {
+        marginTop: theme.spacing(2),
+        minWidth: 120,
+    },
+    formControlLabel: {
+        marginTop: theme.spacing(1),
+    },
+}));
 class Buyer extends Component {
   state = {
     isOpenMore: false,
     isOpenEdit: false,
     isOpenAdd: false,
     currentProducts: {},
+    basket:[],
   };
-
+    // const [fullWidth, setFullWidth] = React.useState(true);
+    // const [maxWidth, setMaxWidth] = React.useState('sm');
   handleClickOpenInfo = (guid) => {
     const { data } = this.props.products;
 
@@ -35,78 +52,79 @@ class Buyer extends Component {
 
   handleOnCloseInfo = () => this.setState({ isOpenMore: false });
 
+    handleClickOpenAdd = () => this.setState({ isOpenAdd: true });
 
+    handleOnCloseAdd = () => this.setState({ isOpenAdd: false });
+
+    AddToBasket= (guid) =>{
+        const { data } = this.props.products;
+       const values = data.find((el) => el.guid === guid);
+        console.log('values12312312',values );
+            this.setState(state => ({
+                basket: state.basket.concat({
+                    ...values
+                }),
+            }));
+        };
   componentDidMount() {
     const { getProducts } = this.props;
 
-    getProducts(products);
+    getGoods.then(res => {
+      console.log('reqweqs432', res.data);
+      getProducts(res.data);
+    });
   }
 
 
   render() {
     const { data } = this.props.products;
 
+      const {
+          isOpenEdit, currentProducts, isOpenMore, isOpenAdd,basket
+      } = this.state;
+console.log('this.state.basket', this.state.basket);
     const {
-      guid, title, proizvoditel, model, moshnost, haracteristiki, cost,
+      guid, type, price, manufacturer, assemblyPlace, availability, quantity,specifications
     } = this.state.currentProducts;
 
-    const {
-      isOpenMore,
-    } = this.state;
+console.log('this.state.currentProducts',this.state.currentProducts);
     return (
 
       <div className="AllCard">
         {data.map(({
-          guid, title, proizvoditel, model, moshnost, haracteristiki, cost,
+                     guid, type, price, manufacturer, assemblyPlace, quantity, specifications,
         }) => (
           <Card
-            id="card"
-            key={guid}
-            title={title}
-            proizvoditel={proizvoditel}
-            model={model}
-            moshnost={moshnost}
-            haracteristiki={haracteristiki}
-            cost={cost}
-
-            guid={guid}
-            delProducts={this.delProducts}
-            handleClickOpenE={this.handleClickOpenEdit}
-            handleClickOpenM={this.handleClickOpenInfo}
+              id="card"
+              key={guid}
+              type={type}
+              price={price}
+              manufacturer={manufacturer}
+              assemblyPlace={assemblyPlace}
+              quantity={quantity}
+              guid={guid}
+              specificationName={specifications[0].specificationName}
+              value={specifications[0].specificationValue.value}
+              AddToBasket={this.AddToBasket}
           />
         ))}
+          <div>
 
-
-        <Modal isOpen={isOpenMore} handleClose={this.handleOnCloseInfo} id="modal">
-          <DialogTitle>
-              тип товара
-            {' '}
-            {title}
-          </DialogTitle>
-          <DialogContent style={{ width: 200, marginBottom: 15 }}>
-            <Typography variant="body2" color="textSecondary" component="p">
-                производитель
-              {' '}
-              {proizvoditel}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                цена:
-              {cost}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                характеристики:
-              {haracteristiki}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                модель:
-              {model}
-            </Typography>
-          </DialogContent>
-          <Button onClick={this.handleOnCloseInfo} color="primary" autoFocus>
-              Close
-          </Button>
-        </Modal>
-
+              <Button
+                  type="button"
+                  className="button-add"
+                  onClick={this.handleClickOpenAdd}
+              >
+                  Корзина
+              </Button>
+              <Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd}>
+                  <CreateCard
+                      basket={basket}
+                       onSubmit={this.AddToBasket}
+                      handleClose={this.handleOnCloseAdd}
+                  />
+              </Dialog>
+          </div>
       </div>
     );
   }

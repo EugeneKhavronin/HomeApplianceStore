@@ -67,6 +67,7 @@ class ListProducts extends Component {
   }
 
   delProducts=(guid) => {
+    console.log('guid', guid);
     this.props.DeleteProducts(guid);
     removeGoods(guid);
   };
@@ -125,7 +126,7 @@ console.log('data',data);
 
       <div className="AllCard">
         {data.map(({
-                     guid, type, price, manufacturer, assemblyPlace, quantity, specifications,
+                     guid, type, price, manufacturer, assemblyPlace, quantity, specifications,availability
         }) => (
           <Card
             id="card"
@@ -135,6 +136,7 @@ console.log('data',data);
             manufacturer={manufacturer}
             assemblyPlace={assemblyPlace}
             quantity={quantity}
+            availability={availability}
             guid={guid}
             specificationName={specifications[0].specificationName}
             value={specifications[0].specificationValue.value}
