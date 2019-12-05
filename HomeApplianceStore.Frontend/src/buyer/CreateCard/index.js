@@ -91,6 +91,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {Field, Form} from "react-final-form";
+import DialogContent from "@material-ui/core/DialogContent";
 
 const useStyles = makeStyles({
     root: {
@@ -104,44 +106,77 @@ const useStyles = makeStyles({
 
 
 
-export default function CreateCard( basket, onSubmit, handleClose ) {
+const CreateCard = ( {basket, onSubmit, handleClose}) => {
     const classes = useStyles();
-console.log('basket', basket);
+console.log('basket11111111111', basket);
+//
     return (
-        <Paper className={classes.root}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="right">type</TableCell>
-                        <TableCell align="right">availability</TableCell>
-                        <TableCell align="right">price</TableCell>
-                        <TableCell align="right">quantity</TableCell>
-                        <TableCell align="right">specificationName</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {basket.basket.map(row => {
-                        console.log('row.specifications[0]', row.specifications[0].specificationName);
-                        return(
-                        <TableRow key={row.guid}>
-                            <TableCell align="right">{row.type}</TableCell>
-                            <TableCell align="right">{row.availability +''}</TableCell>
-                            <TableCell align="right">{row.price}</TableCell>
-                            <TableCell align="right">{row.quantity}</TableCell>
-                            <TableCell align="right">{row.specifications[0].specificationName +''}</TableCell>
-                        </TableRow>
-                    )})}
-                </TableBody>
-            </Table>
-            <DialogActions className="AddClose">
-                <Button type="submit" color="primary">
-                    купить
-                </Button>
-                <Button onClick={handleClose} color="primary" autoFocus>
-                    close
-                </Button>
-            </DialogActions>
-        </Paper>
-
+        <Form
+            // className={classes.root}
+            basket={basket}
+            onSubmit={onSubmit}
+            render={({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                    <Paper >
+                        <Table className={classes.table} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="right">type</TableCell>
+                                    <TableCell align="right">availability</TableCell>
+                                    <TableCell align="right">price</TableCell>
+                                    <TableCell align="right">quantity</TableCell>
+                                    <TableCell align="right">specificationName</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                console.log('asdasda', basket)
+                            }
+                                {basket.map(row => {
+                                    console.log('row.specifications[0]', row.specifications[0].specificationName);
+                                    return(
+                                        <TableRow key={row.guid}>
+                                            <TableCell align="right">{row.type}</TableCell>
+                                            <TableCell align="right">{row.availability +''}</TableCell>
+                                            <TableCell align="right">{row.price}</TableCell>
+                                            <TableCell align="right">{row.quantity}</TableCell>
+                                            <TableCell align="right">{row.specifications[0].specificationName +''}</TableCell>
+                                        </TableRow>
+                                    )})}
+                            </TableBody>
+                        </Table>
+                    </Paper>
+                    <DialogContent>
+                        <div>
+                            <label>fullName:</label>
+                            <Field required name="fullName" component="input" type="text" className="title" />
+                        </div>
+                        <div>
+                            <label>email:</label>
+                            <Field required name="email" component="input" type="text" className="review" />
+                        </div>
+                        <div>
+                            <label>address:</label>
+                            <Field required name="address" component="input" type="textarea" className="text" />
+                        </div>
+                        <div>
+                            <label>phoneNumber:</label>
+                            <Field required name="address" component="input" type="textarea" className="text" />
+                        </div>
+                    </DialogContent>
+                    <DialogActions className="AddClose">
+                        <Button type="submit" color="primary">
+                            Купить
+                        </Button>
+                        <Button onClick={handleClose} color="primary" autoFocus>
+                            Закрыть
+                        </Button>
+                    </DialogActions>
+                </form>
+            )}
+        />
     );
-}
+};
+
+
+export default CreateCard;

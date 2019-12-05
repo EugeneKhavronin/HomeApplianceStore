@@ -18,16 +18,16 @@ const CreateCard = ({ onSubmit, handleClose }) => (
             <Field required name="fullName" component="input" type="text" className="title" />
           </div>
           <div>
-            <label>производитель:</label>
+            <label>email:</label>
             <Field required name="email" component="input" type="text" className="review" />
           </div>
           <div>
-            <label>email:</label>
+            <label>address:</label>
             <Field required name="address" component="input" type="textarea" className="text" />
           </div>
           <div>
             <label>phoneNumber:</label>
-            <Field required name="phoneNumber" component="input" type="textarea" className="text" />
+            <Field required name="address" component="input" type="textarea" className="text" />
           </div>
           <div>
             <label>orders:</label>

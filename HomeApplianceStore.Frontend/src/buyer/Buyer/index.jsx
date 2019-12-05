@@ -17,7 +17,6 @@ import Modal from '../Modal';
 import './style.css';
 import Dialog from '@material-ui/core/Dialog';
 import CreateCard from '../CreateCard';
-import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -55,7 +54,16 @@ class Buyer extends Component {
     handleClickOpenAdd = () => this.setState({ isOpenAdd: true });
 
     handleOnCloseAdd = () => this.setState({ isOpenAdd: false });
+    handleSubmitBuy=(values)=>{
+        const guid={guid: '1f1119ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`};
+        Object.assign(values, guid);
+        console.log('ok', values);
+        this.setState({isOpenAdd: false});
+        createClient(values).then(values=> {
+            console.log("values",values);
 
+        })
+    };
     AddToBasket= (guid) =>{
         const { data } = this.props.products;
        const values = data.find((el) => el.guid === guid);
@@ -80,7 +88,7 @@ class Buyer extends Component {
     const { data } = this.props.products;
 
       const {
-          isOpenEdit, currentProducts, isOpenMore, isOpenAdd,basket
+          isOpenEdit, currentProducts, isOpenMore, isOpenAdd,basket,
       } = this.state;
 console.log('this.state.basket', this.state.basket);
     const {
@@ -120,7 +128,7 @@ console.log('this.state.currentProducts',this.state.currentProducts);
               <Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd}>
                   <CreateCard
                       basket={basket}
-                       onSubmit={this.AddToBasket}
+                      onSubmit={this.handleSubmitBuy}
                       handleClose={this.handleOnCloseAdd}
                   />
               </Dialog>

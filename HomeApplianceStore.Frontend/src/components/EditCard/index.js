@@ -82,7 +82,7 @@ const CreateCard = ({ onSubmit, handleClose, initialValues }) => {
                 </DialogContent>
                 <DialogActions className="AddClose">
                     <Button type="submit" color="primary">
-                        edit news
+                        edit
                     </Button>
                     <Button onClick={handleClose} color="primary" autoFocus>
                         close
