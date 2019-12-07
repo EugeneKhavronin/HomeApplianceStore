@@ -69,7 +69,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task DeleteOrder([FromRoute] Guid guid)
+        public async Task DeleteOrder([FromQuery]Guid guid)
         {
             await _orderService.Delete(guid);
         }

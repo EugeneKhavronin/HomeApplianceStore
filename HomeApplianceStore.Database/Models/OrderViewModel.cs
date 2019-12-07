@@ -7,6 +7,7 @@ namespace HomeApplianceStore.Database.Models
 {
     public class OrderViewModel
     {
+        public Guid guid { get; set; }
         /// <summary>
         /// Дата и время
         /// </summary>
