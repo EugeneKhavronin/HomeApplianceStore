@@ -22,38 +22,17 @@ namespace HomeApplianceStore.Domain.Services
         }
 
         /// <inheritdoc />
-        public async Task<List<OrderViewModel>> GetAll()
+        public async Task<List<Order>> GetAll()
         {
             var orders = await _context.Orders.ToListAsync();
-            List<OrderViewModel> viewModel = new List<OrderViewModel>();
-            foreach (var order in orders)
-            {
-                List<Goods> goods = new List<Goods>();
-                _context.Orders.Select(a => a.GoodsGuids).FirstOrDefault()
-                    ?.ForEach(async guid =>
-                    {
-                        goods.Add(await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid));
-                    });
-                var orderViewModel = new OrderViewModel
-                {
-                    guid = order.Guid,
-                    ClientGuid = order.ClientGuid,
-                    CurrentStatus = order.CurrentStatus,
-                    DateTimeOrder = order.DateTimeOrder,
-                    DeliveryTerms = order.DeliveryTerms,
-                    Goods = goods,
-                    TotalCost = order.TotalCost
-                };
-                viewModel.Add(orderViewModel);
-            }
-            return viewModel;
+
+            return orders;
         }
 
         /// <inheritdoc />
         public async Task<Order> Get(Guid guid)
         {
-            var order = await _context.Orders.FirstOrDefaultAsync(a => a.Guid == guid);
-            return order;
+            return await _context.Orders.FirstOrDefaultAsync(a => a.Guid == guid);
         }
 
         /// <inheritdoc />

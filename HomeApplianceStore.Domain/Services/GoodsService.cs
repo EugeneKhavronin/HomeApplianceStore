@@ -35,21 +35,13 @@ namespace HomeApplianceStore.Domain.Services
                 .ThenInclude(a => a.SpecificationValue).ToListAsync();
         }
 
-        //?????
         public List<Goods> GetAllBySpecification(List<Specifications> specification)
         {
-            var kek = _context.Goods
-                .Where(a => a.Specifications.First().SpecificationName == specification.First().SpecificationName);
-
-            var lolol = kek.ToList();
-
-            var lol = kek
+            return _context.Goods
+                .Where(a => a.Specifications.First().SpecificationName == specification.First().SpecificationName)
                 .Include(a => a.Specifications)
-                .ThenInclude(a => a.SpecificationValue);
-
-            var lolkek = lol.ToList();
-
-            return lolkek;
+                .ThenInclude(a => a.SpecificationValue)
+                .ToList();
         }
 
         /// <inheritdoc />
@@ -74,7 +66,6 @@ namespace HomeApplianceStore.Domain.Services
             return model.Guid;
         }
 
-        ///???????
         /// <inheritdoc />
         public async Task<Guid> Update(Goods model)
         {
