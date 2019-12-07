@@ -11,6 +11,7 @@ namespace HomeApplianceStore.API.Controllers
     /// Контроллер заказов
     /// </summary>
     [Route("api/order")]
+    [ApiController]
     public class OrderController
     {
         private readonly IOrderService _orderService;
@@ -36,7 +37,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
         [HttpGet("{guid}")]
-        public async Task<Order> GetOrder([FromRoute] Guid guid)
+        public async Task<Order> GetOrder(Guid guid)
         {
             return await _orderService.Get(guid);
         }
@@ -47,7 +48,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="order"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Guid> CreateOrder([FromBody]Order order)
+        public async Task<Guid> CreateOrder(Order order)
         {
             return await _orderService.Create(order);
         }
@@ -58,7 +59,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="order"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<Guid> UpdateOrder([FromBody] Order order)
+        public async Task<Guid> UpdateOrder(Order order)
         {
             return await _orderService.Update(order);
         }
@@ -69,7 +70,7 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task DeleteOrder([FromQuery]Guid guid)
+        public async Task DeleteOrder(Guid guid)
         {
             await _orderService.Delete(guid);
         }
