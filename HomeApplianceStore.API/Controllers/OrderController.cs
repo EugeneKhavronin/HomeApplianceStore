@@ -25,7 +25,7 @@ namespace HomeApplianceStore.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<OrderViewModel>> GetOrders()
+        public async Task<List<Order>> GetOrders()
         {
             return await _orderService.GetAll();
         }
