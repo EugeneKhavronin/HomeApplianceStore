@@ -85,16 +85,22 @@ namespace HomeApplianceStore.Domain.Services
             await _context.SaveChangesAsync();
             return goods.Guid;
         }
-
-        //??????
+        
         /// <inheritdoc />
-        public async Task Delete(Guid guid, Guid guidSpec, Guid guidValue)
+        public async Task Delete(Guid guid, List<Guid> guidSpec, List<Guid> guidValue)
         {
             var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid);
-            var goodsSpec = await _context.Specifications.FirstOrDefaultAsync(a => a.Guid == guidSpec);
-            var goodsSpecValue = await _context.SpecificationValues.FirstOrDefaultAsync(a => a.Guid == guidValue);
-            _context.SpecificationValues.Remove(goodsSpecValue);
-            _context.Specifications.Remove(goodsSpec);
+            foreach (var guid1 in guidSpec)
+            {
+                var goodsSpec = await _context.Specifications.FirstOrDefaultAsync(a => a.Guid == guid1);
+                _context.Specifications.Remove(goodsSpec);
+            }
+
+            foreach (var guid1 in guidValue)
+            {
+                var goodsSpecValue = await _context.SpecificationValues.FirstOrDefaultAsync(a => a.Guid == guid1);
+                _context.SpecificationValues.Remove(goodsSpecValue);
+            }
             _context.Goods.Remove(goods);
             await _context.SaveChangesAsync();
         }
