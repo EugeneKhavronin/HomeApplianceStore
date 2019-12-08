@@ -72,9 +72,22 @@ class ListUsers extends Component {
 
   handleOnCloseAdd = () => this.setState({ isOpenAdd: false });
 
+  // handleSubmitAddUsersAdd = (values) => {
+  //   const { addUsers } = this.props;
+  //   addUsers(values);
+  //   this.setState({isOpenAdd: false});
+  //   createClient(values).then(values=> {
+  //     console.log("values",values);
+  //
+  //   })
+  // };
   handleSubmitAddUsersAdd = (values) => {
     const { addUsers } = this.props;
     addUsers(values);
+    const guid={guid: '2f455682-245b-4052-8872-'+`f${(+new Date()).toString(16)}`};
+    const orders={orders: null};
+    Object.assign(values, guid,orders);
+    console.log("values090909",values);
     this.setState({isOpenAdd: false});
     createClient(values).then(values=> {
       console.log("values",values);

@@ -67,6 +67,9 @@ class ListProducts extends Component {
   }
 
   delProducts=(guid) => {
+    const { data } = this.props.products;
+   const value = data.find((el) => el.guid === guid);
+   console.log('value666666666666',value);
     console.log('guid', guid);
     this.props.DeleteProducts(guid);
     removeGoods(guid);

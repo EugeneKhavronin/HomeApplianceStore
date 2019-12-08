@@ -3,86 +3,6 @@
 //
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-//
-// import './style.css';
-// import {makeStyles} from "@material-ui/core";
-// const useStyles = makeStyles({
-//     card: {
-//         width: 700,
-//
-//         justifyContent: 'center',
-//         flexDirection: 'row',
-//     },
-//
-//     media: {
-//         height: 700,
-//     },
-//
-//     cardAction: {
-//         flexDirection: 'row',
-//     },
-//
-//     fab: {
-//         width: 35,
-//         height: 35,
-//         margin: 10,
-//     },
-//
-//     info: {
-//         marginRight: 70,
-//     },
-// });
-//
-// const CreateCard = ({ onSubmit, handleClose, basket }) =>{
-//     const classes = useStyles();
-//     console.log('basket',basket);
-//     return(
-//         <Form
-//             onSubmit={onSubmit}
-//             render={({ handleSubmit }) => (
-//                 <form onSubmit={handleSubmit}>
-//                     <DialogContent className={classes.card}>
-//                         <div>
-//                             <label>title:</label>
-//                             <Field required name="title" component="input" type="text" className="title" />
-//                         </div>
-//                         <div>
-//                             <label>производитель:</label>
-//                             <Field required name="proizvoditel" component="input" type="text" className="review" />
-//                         </div>
-//                         <div>
-//                             <label>модель:</label>
-//                             <Field required name="model" component="input" type="textarea" className="text" />
-//                         </div>
-//                         <div>
-//                             <label>мощность:</label>
-//                             <Field required name="moshnost" component="input" type="textarea" className="text" />
-//                         </div>
-//                         <div>
-//                             <label>характеристики:</label>
-//                             <Field required name=" haracteristiki" component="input" type="textarea" className="text" />
-//                         </div>
-//                         <div>
-//                             <label>стоимость:</label>
-//                             <Field required name="cost" component="input" type="textarea" className="text" />
-//                         </div>
-//                     </DialogContent>
-//                     <DialogActions className="AddClose">
-//                         <Button type="submit" color="primary">
-//                             edit news
-//                         </Button>
-//                         <Button onClick={handleClose} color="primary" autoFocus>
-//                             close
-//                         </Button>
-//                     </DialogActions>
-//                 </form>
-//             )}
-//         />
-//     );
-//
-// };
-// export default CreateCard;
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -93,26 +13,39 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Field, Form} from "react-final-form";
 import DialogContent from "@material-ui/core/DialogContent";
+import Fab from "@material-ui/core/Fab";
+import DeleteIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 const useStyles = makeStyles({
     root: {
-        width: '100%',
-        overflowX: 'auto',
+        maxWidth: 600,
+        // minWidth: 1000,
+        // maxWidth: 1000,
+        // minpaperWidthSm:1000,
     },
     table: {
-        minWidth: '100%',
+        minWidth: 300,
     },
+    fab: {
+        width: 35,
+        height: 35,
+        margin: 10,
+    },
+    paperWidthSm:{
+        maxWidth: 'lg'
+    }
 });
 
 
 
-const CreateCard = ( {basket, onSubmit, handleClose}) => {
+const CreateCard = ( {basket, onSubmit, handleClose,delLine,totalCost}) => {
     const classes = useStyles();
 console.log('basket11111111111', basket);
 //
     return (
         <Form
-            // className={classes.root}
+            className={classes.paperWidthSm}
+            totalCost={totalCost}
             basket={basket}
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
@@ -132,7 +65,7 @@ console.log('basket11111111111', basket);
                                 {
                                 console.log('asdasda', basket)
                             }
-                                {basket.map(row => {
+                                {basket.map((row, index) => {
                                     console.log('row.specifications[0]', row.specifications[0].specificationName);
                                     return(
                                         <TableRow key={row.guid}>
@@ -141,6 +74,14 @@ console.log('basket11111111111', basket);
                                             <TableCell align="right">{row.price}</TableCell>
                                             <TableCell align="right">{row.quantity}</TableCell>
                                             <TableCell align="right">{row.specifications[0].specificationName +''}</TableCell>
+                                            <TableCell >
+                                                <Button variant="outlined" onClick={() => delLine(index)}>
+                                                    delete
+                                                </Button>
+                                                {/*<Fab aria-label="Delete" className={classes.fab} onClick={() => delLine(index)}>*/}
+                                                {/*    <DeleteIcon />*/}
+                                                {/*</Fab>*/}
+                                            </TableCell>
                                         </TableRow>
                                     )})}
                             </TableBody>
@@ -161,8 +102,17 @@ console.log('basket11111111111', basket);
                         </div>
                         <div>
                             <label>phoneNumber:</label>
-                            <Field required name="address" component="input" type="textarea" className="text" />
+                            <Field required name="phoneNumber" component="input" type="textarea" className="text" />
                         </div>
+                        <div>
+                            <label>deliveryTerms:</label>
+                            <Field required name="deliveryTerms" component="input" type="textarea" className="deliveryTerms" />
+                        </div>
+                        <div>
+                            <label>currentStatus:</label>
+                            <Field required name="currentStatus" component="input" type="textarea" className="currentStatus" />
+                        </div>
+                        totalCost={totalCost}
                     </DialogContent>
                     <DialogActions className="AddClose">
                         <Button type="submit" color="primary">

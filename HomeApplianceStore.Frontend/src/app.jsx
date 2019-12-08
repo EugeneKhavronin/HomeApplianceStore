@@ -7,6 +7,7 @@ import {
   BrowserRouter as Router, Switch, Route, Link,
 } from 'react-router-dom';
 import ListUsers from './users/ListUsers';
+import ListOrders from './orders/ListOrders';
 import Buyer from './buyer/buyer';
 import ListProducts from './components/ListProducts';
 import reducer from './store/reducers';
@@ -33,7 +34,9 @@ export default class App extends Component {
                 <Button variant="contained" color="primary" className="linkClient">
                   <Link to="/client" style={{ textDecoration: 'none', color:'white'}} >buyer</Link>
                 </Button>
-
+                <Button variant="contained" color="primary" className="linkOrders">
+                  <Link to="/orders" style={{ textDecoration: 'none', color:'white'}} >orders</Link>
+                </Button>
 
 
               </nav>
@@ -49,6 +52,9 @@ export default class App extends Component {
                 </Route>
                 <Route path="/client">
                   <Buyer/>
+                </Route>
+                <Route path="/orders">
+                  <ListOrders/>
                 </Route>
               </Switch>
             </div>

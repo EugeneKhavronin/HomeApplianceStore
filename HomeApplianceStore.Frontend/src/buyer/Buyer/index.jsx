@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import {getGoods, createGoods, removeGoods, editGoods, editClient, removeClient, createClient} from '../../utils';
-import { products } from '../../database';
+import {getGoods,createClient,createOrder} from '../../utils';
 import Card from '../Card';
-import EditCard from '../EditCard';
-import {
-  deleteProducts, getProducts, editProducts, addProducts,
+import {getProducts,
 } from '../../store/action/products';
-import Modal from '../Modal';
 
 import './style.css';
 import Dialog from '@material-ui/core/Dialog';
@@ -40,6 +33,7 @@ class Buyer extends Component {
     isOpenAdd: false,
     currentProducts: {},
     basket:[],
+      totalCost: 0,
   };
     // const [fullWidth, setFullWidth] = React.useState(true);
     // const [maxWidth, setMaxWidth] = React.useState('sm');
@@ -55,15 +49,56 @@ class Buyer extends Component {
 
     handleOnCloseAdd = () => this.setState({ isOpenAdd: false });
     handleSubmitBuy=(values)=>{
-        const guid={guid: '1f1119ff-8b86-d011-b42d-'+`f${(+new Date()).toString(16)}`};
-        Object.assign(values, guid);
-        console.log('ok', values);
+        const today = new Date();
+        const guidClient={guid: '770306de-49a1-4be1-9338-'+`f${(+new Date()).toString(16)}`};
+        const fullName = {fullName: values.fullName};
+        const address = {address: values.address};
+        const phoneNumber = {phoneNumber: values.phoneNumber};
+        const email = {email: values.email};
+console.log('values',values);
+        const guidOrder={guid: '6cd14088-2417-4905-a683-'+`f${(+new Date()).toString(16)}`};
+        const clientGuid = {clientGuid: guidClient.guid};
+        const currentStatus = {currentStatus: values.currentStatus};
+        const dateTimeOrder = {dateTimeOrder: today.toISOString()};
+        const deliveryTerms = {deliveryTerms: values.deliveryTerms};
+        const totalCost={totalCost: this.state.totalCost};
+        const goods={goodsGuids: this.state.basket.map(function(el) {
+                return el.guid;
+            })};
+        const order = {};
+        const client = {};
+
+        Object.assign(order, currentStatus,guidOrder, deliveryTerms, dateTimeOrder,clientGuid,totalCost,goods);
+        Object.assign(client, guidClient,fullName,address,phoneNumber,email);
+        console.log('order',order);
+        console.log('client',client);
         this.setState({isOpenAdd: false});
-        createClient(values).then(values=> {
-            console.log("values",values);
+        createClient(client).then(values=> {
+            createOrder(order);
 
         })
+
+
     };
+
+    delLine=(tmp)=>{
+        console.log('this.state.basket1',this.state.basket);
+
+        console.log('tmp',tmp);
+        const values = this.state.basket.find((el, index) => index === tmp);
+        const before = this.state.basket.slice(0, tmp);
+        const after = this.state.basket.slice(tmp+1);
+        const newArray = [...before, ...after];
+        console.log('newArray ',newArray );
+        console.log('values00000000000000000',values );
+        // console.log('values.price ',values.price);
+        // console.log('this.state.basket11',this.state.basket);
+        this.setState(state => ({
+            basket: newArray,
+            totalCost: state.totalCost - values.price
+        }));
+    };
+
     AddToBasket= (guid) =>{
         const { data } = this.props.products;
        const values = data.find((el) => el.guid === guid);
@@ -72,6 +107,7 @@ class Buyer extends Component {
                 basket: state.basket.concat({
                     ...values
                 }),
+                totalCost: state.totalCost + values.price
             }));
         };
   componentDidMount() {
@@ -88,7 +124,7 @@ class Buyer extends Component {
     const { data } = this.props.products;
 
       const {
-          isOpenEdit, currentProducts, isOpenMore, isOpenAdd,basket,
+          isOpenEdit, currentProducts, isOpenMore, isOpenAdd,basket, totalCost
       } = this.state;
 console.log('this.state.basket', this.state.basket);
     const {
@@ -127,9 +163,11 @@ console.log('this.state.currentProducts',this.state.currentProducts);
               </Button>
               <Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd}>
                   <CreateCard
+                      totalCost={totalCost}
                       basket={basket}
                       onSubmit={this.handleSubmitBuy}
                       handleClose={this.handleOnCloseAdd}
+                      delLine={this.delLine}
                   />
               </Dialog>
           </div>

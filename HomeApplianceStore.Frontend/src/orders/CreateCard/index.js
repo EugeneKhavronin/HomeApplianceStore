@@ -13,26 +13,22 @@ const CreateCard = ({ onSubmit, handleClose }) => (
     render={({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
         <DialogContent className="input-group-modal">
-            <div>
-            <label>fullName:</label>
-            <Field required name="fullName" component="input" type="text" className="title" />
+          <div>
+            <label>totalCost:</label>
+            <Field required name="totalCost" component="input" type="text" className="totalCost" />
           </div>
           <div>
-            <label>email:</label>
-            <Field required name="email" component="input" type="text" className="review" />
+            <label>dateTimeOrder:</label>
+            <Field required name="dateTimeOrder" component="input" type="date" className="dateTimeOrder" />
           </div>
           <div>
-            <label>address:</label>
-            <Field required name="address" component="input" type="textarea" className="text" />
+            <label>deliveryTerms:</label>
+            <Field required name="deliveryTerms" component="input" type="textarea" className="deliveryTerms" />
           </div>
           <div>
-            <label>phoneNumber:</label>
-            <Field required name="phoneNumber" component="input" type="textarea" className="text" />
+            <label>currentStatus:</label>
+            <Field required name="currentStatus" component="input" type="textarea" className="currentStatus" />
           </div>
-          {/*<div>*/}
-          {/*  <label>orders:</label>*/}
-          {/*  <Field  name=" orders" component="input" type="textarea" className="text" />*/}
-          {/*</div>*/}
         </DialogContent>
         <DialogActions className="AddClose">
           <Button type="submit" color="primary">

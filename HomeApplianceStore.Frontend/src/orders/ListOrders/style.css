@@ -1,0 +1,39 @@
+
+/*#modal{*/
+/*    height:800px!important;*/
+/*    width:300px !important;*/
+/*    background-color: #2F4F4F !important;*/
+
+/*}*/
+/*body{*/
+/*    margin: 0;*/
+/*}*/
+/*.AllCard{*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-around !important;*/
+/*}*/
+
+.linkAdmin{
+    position: absolute;
+    top: -53px;
+    left: 590px;
+}
+.linkUsers{
+    position: absolute;
+    top: -53px;
+    left: 650px;
+}
+.linkClient{
+    position: absolute;
+    top: -53px;
+    left: 710px;
+}
+button-add{
+    position: absolute;
+    top: -53px;
+    left: 900px;
+}
+
