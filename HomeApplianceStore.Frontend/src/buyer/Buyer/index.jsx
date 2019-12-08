@@ -6,10 +6,16 @@ import {getGoods,createClient,createOrder} from '../../utils';
 import Card from '../Card';
 import {getProducts,
 } from '../../store/action/products';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import FullScreenDialog from '../CreateCard';
+import {addUsers,} from '../../store/action/users';
+import {addOrders} from "../../store/action/orders";
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
 
-import './style.css';
-import Dialog from '@material-ui/core/Dialog';
-import CreateCard from '../CreateCard';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -25,37 +31,36 @@ const useStyles = makeStyles(theme => ({
     formControlLabel: {
         marginTop: theme.spacing(1),
     },
+    margin: {
+        margin: theme.spacing(1),
+    },
 }));
 class Buyer extends Component {
   state = {
-    isOpenMore: false,
-    isOpenEdit: false,
     isOpenAdd: false,
     currentProducts: {},
     basket:[],
       totalCost: 0,
+      searchValue: '',
+      listProducts: this.props.products,
   };
     // const [fullWidth, setFullWidth] = React.useState(true);
     // const [maxWidth, setMaxWidth] = React.useState('sm');
-  handleClickOpenInfo = (guid) => {
-    const { data } = this.props.products;
 
-    this.setState({ isOpenMore: true, currentProducts: data.find((el) => el.guid === guid) });
-  };
-
-  handleOnCloseInfo = () => this.setState({ isOpenMore: false });
 
     handleClickOpenAdd = () => this.setState({ isOpenAdd: true });
 
     handleOnCloseAdd = () => this.setState({ isOpenAdd: false });
     handleSubmitBuy=(values)=>{
+        console.log('values7777777777777777777777777777777777777777777777777777777777',values);
+        const { addUsers } = this.props;
+        const { addOrders } = this.props;
         const today = new Date();
         const guidClient={guid: '770306de-49a1-4be1-9338-'+`f${(+new Date()).toString(16)}`};
         const fullName = {fullName: values.fullName};
         const address = {address: values.address};
         const phoneNumber = {phoneNumber: values.phoneNumber};
         const email = {email: values.email};
-console.log('values',values);
         const guidOrder={guid: '6cd14088-2417-4905-a683-'+`f${(+new Date()).toString(16)}`};
         const clientGuid = {clientGuid: guidClient.guid};
         const currentStatus = {currentStatus: values.currentStatus};
@@ -70,8 +75,8 @@ console.log('values',values);
 
         Object.assign(order, currentStatus,guidOrder, deliveryTerms, dateTimeOrder,clientGuid,totalCost,goods);
         Object.assign(client, guidClient,fullName,address,phoneNumber,email);
-        console.log('order',order);
-        console.log('client',client);
+        addUsers(client);
+        addOrders(order);
         this.setState({isOpenAdd: false});
         createClient(client).then(values=> {
             createOrder(order);
@@ -99,6 +104,32 @@ console.log('values',values);
         }));
     };
 
+    search=(event)=>{
+        const { getProducts } = this.props;
+        console.log('value',event);
+        const text = event.target.value;
+        console.log('text',text);
+        console.log('currentProducts',this.props.products.data);
+       const filterProducts ={data: this.props.products.data.filter(
+               el=>el.type.toUpperCase().includes(text.toUpperCase())===true||
+                   el.availability+''.toUpperCase().includes(text.toUpperCase())===true||
+                   el.manufacturer.toUpperCase().includes(text.toUpperCase())===true||
+                   el.price+''.includes(text)===true||
+                   el.quantity+''.includes(text)===true||
+                   el.assemblyPlace.toUpperCase().includes(text.toUpperCase())===true||
+                   el.specifications[0].specificationName.toUpperCase().includes(text.toUpperCase())===true||
+                   el.specifications[0].specificationValue.value.toUpperCase().includes(text.toUpperCase())===true)};
+        console.log('filterProducts',filterProducts);
+        // getProducts(filterProducts);
+        this.setState( () =>   ({searchValue:text,listProducts: filterProducts }));
+        // this.setState( () =>   ({ listProducts: filterProducts}));
+
+        console.log('this.state.listProducts',this.state.listProducts);
+        // this.setState(state => ({
+        //     searchValue:text
+        //     }));
+    };
+
     AddToBasket= (guid) =>{
         const { data } = this.props.products;
        const values = data.find((el) => el.guid === guid);
@@ -113,28 +144,50 @@ console.log('values',values);
   componentDidMount() {
     const { getProducts } = this.props;
 
+
     getGoods.then(res => {
+        this.setState( () =>   ({listProducts:res}));
       console.log('reqweqs432', res.data);
       getProducts(res.data);
     });
   }
 
 
-  render() {
-    const { data } = this.props.products;
 
+  render() {
+      console.log(' this.state.listProducts', this.state.listProducts);
+    const { data } = this.state.listProducts;
+console.log('data',data);
       const {
-          isOpenEdit, currentProducts, isOpenMore, isOpenAdd,basket, totalCost
+          isOpenEdit, currentProducts, isOpenMore, isOpenAdd,basket, totalCost,searchValue
       } = this.state;
-console.log('this.state.basket', this.state.basket);
-    const {
-      guid, type, price, manufacturer, assemblyPlace, availability, quantity,specifications
-    } = this.state.currentProducts;
+    // const {
+    //   guid, type, price, manufacturer, assemblyPlace, availability, quantity,specifications
+    // } = this.state.currentProducts;
 
 console.log('this.state.currentProducts',this.state.currentProducts);
     return (
 
       <div className="AllCard">
+          <FormControl   >
+              <InputLabel>Поиск</InputLabel>
+              <Input
+                  onChange={this.search}
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                      <InputAdornment position="start">
+                          <SearchIcon />
+                      </InputAdornment>
+                  }
+              />
+          </FormControl>
+          <Button
+              type="button"
+              className="button-add"
+              onClick={this.handleClickOpenAdd}
+          >
+              <ShoppingCartIcon/>
+          </Button>
         {data.map(({
                      guid, type, price, manufacturer, assemblyPlace, quantity, specifications,
         }) => (
@@ -153,23 +206,16 @@ console.log('this.state.currentProducts',this.state.currentProducts);
           />
         ))}
           <div>
-
-              <Button
-                  type="button"
-                  className="button-add"
-                  onClick={this.handleClickOpenAdd}
-              >
-                  Корзина
-              </Button>
-              <Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd}>
-                  <CreateCard
+                  <FullScreenDialog
+                      open={isOpenAdd}
+                      handleClickOpen={isOpenAdd}
                       totalCost={totalCost}
                       basket={basket}
                       onSubmit={this.handleSubmitBuy}
                       handleClose={this.handleOnCloseAdd}
                       delLine={this.delLine}
                   />
-              </Dialog>
+
           </div>
       </div>
     );
@@ -183,6 +229,8 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = (dispatch) => ({
   getProducts: (products) => dispatch(getProducts(products)),
+    addUsers: (users) => dispatch(addUsers(users)),
+    addOrders: (orders) => dispatch(addOrders(orders)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buyer);

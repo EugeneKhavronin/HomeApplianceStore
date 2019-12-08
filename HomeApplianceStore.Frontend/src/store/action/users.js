@@ -1,5 +1,3 @@
-import generationGuid from '../../utils';
-
 export const DELETE_USERS_SUCCESS = 'DELETE_USERS_SUCCESS';
 
 export const EDIT_USERS_SUCCESS = 'EDIT_USERS_SUCCESS';
@@ -22,8 +20,9 @@ export const editUsers = (users) => ({
   payload: users,
 });
 export const addUsers = (users) => {
+    console.log('users777777777',users);
   return {
     type: 'ADD_USERS_SUCCESS',
-    payload: { ...users, photo: '', guid: generationGuid() },
+    payload: users
   };
 };

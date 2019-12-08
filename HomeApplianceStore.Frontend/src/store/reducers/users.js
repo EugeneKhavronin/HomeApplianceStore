@@ -7,11 +7,13 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  console.log('action.payload1',action.payload);
   switch (action.type) {
     case GET_USERS_SUCCESS:
       return { data: action.payload };
 
     case ADD_USERS_SUCCESS:
+      console.log('action.payload2',action.payload);
       return {
         ...state,
         data: state.data.concat(action.payload),

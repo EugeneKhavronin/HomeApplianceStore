@@ -19,12 +19,15 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <header className="header-back">
-          <h1 className="titleNews">Интернет магазин бытовой техники </h1>
+
+
 
           <Router>
             <div>
+            <header className="header-back">
               <nav>
+              <div className="titleNews">Интернет магазин бытовой техники </div>
+
                 <Button variant="contained" color="primary" className="linkAdmin">
                   <Link to="/admin" style={{ textDecoration: 'none', color:'white'}} >admin</Link>
                 </Button>
@@ -32,15 +35,13 @@ export default class App extends Component {
                   <Link to="/users" style={{ textDecoration: 'none',color:'white'}} >users</Link>
                 </Button>
                 <Button variant="contained" color="primary" className="linkClient">
-                  <Link to="/client" style={{ textDecoration: 'none', color:'white'}} >buyer</Link>
+                  <Link to="/buyer" style={{ textDecoration: 'none', color:'white'}} >buyer</Link>
                 </Button>
                 <Button variant="contained" color="primary" className="linkOrders">
                   <Link to="/orders" style={{ textDecoration: 'none', color:'white'}} >orders</Link>
                 </Button>
-
-
               </nav>
-
+            </header>
               {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
               <Switch>
@@ -50,7 +51,7 @@ export default class App extends Component {
                 <Route path="/users">
                   <ListUsers />
                 </Route>
-                <Route path="/client">
+                <Route path="/buyer">
                   <Buyer/>
                 </Route>
                 <Route path="/orders">
@@ -60,8 +61,6 @@ export default class App extends Component {
             </div>
           </Router>
 
-
-        </header>
 
 
       </Provider>

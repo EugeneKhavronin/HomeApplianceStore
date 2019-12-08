@@ -14,7 +14,6 @@ import {
 } from '../../store/action/products';
 import Modal from '../Modal';
 
-import './style.css';
 import Dialog from '@material-ui/core/Dialog';
 import CreateCard from '../CreateCard';
 

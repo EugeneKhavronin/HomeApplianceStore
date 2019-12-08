@@ -13,7 +13,6 @@ import {
 } from '../../store/action/users';
 import Modal from '../Modal';
 
-import './style.css';
 import Dialog from '@material-ui/core/Dialog';
 import CreateCard from '../CreateCard';
 
@@ -59,7 +58,10 @@ class ListUsers extends Component {
     const { getUsers } = this.props;
     getClient.then(res => {
       console.log('reqweqs432', res.data);
-      getUsers(res.data);
+      if(res.data.length>=this.props.users.data.length ){
+        getUsers(res.data);
+      }
+
     });
   }
 
@@ -105,7 +107,6 @@ class ListUsers extends Component {
     const {
       isOpenEdit, currentUsers, isOpenMore, isOpenAdd,
     } = this.state;
-    console.log(' guid', guid);
     return (
 
       <div className="AllCard">

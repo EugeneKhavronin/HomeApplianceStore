@@ -4,7 +4,6 @@ import { Form, Field } from 'react-final-form';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import './style.css';
 import Typography from "@material-ui/core/Typography";
 
 const CreateCard = ({ onSubmit, handleClose, initialValues }) => {

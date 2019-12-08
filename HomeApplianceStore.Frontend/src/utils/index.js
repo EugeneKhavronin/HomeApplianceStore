@@ -29,7 +29,9 @@ export const createGoods = values => axios.post(`${URL}/api/goods`, values);
 export const removeGoods = guid =>
     axios.delete(`${URL}/api/goods?guid=${guid}`);
 
-
+export const editGoods = values => {console.log('putvalues',values);
+    return(axios.put(`${URL}/api/goods`, values));
+};
 
 
 export const getOrder = axios.get(`${URL}/api/order`);

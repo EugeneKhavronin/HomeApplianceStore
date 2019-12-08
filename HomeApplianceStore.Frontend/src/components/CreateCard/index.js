@@ -2,62 +2,128 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 
 import Button from '@material-ui/core/Button';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 
-import './style.css';
-import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import {CssBaseline, Grid, Paper} from "@material-ui/core";
 
-const CreateCard = ({ onSubmit, handleClose }) => (
-  <Form
-    onSubmit={onSubmit}
-    render={({ handleSubmit }) => (
-      <form onSubmit={handleSubmit}>
-        <DialogContent className="input-group-modal">
-            <div>
-                <label>type:</label>
-                <Field required name="type" component="input" type="text" className="type" />
-            </div>
-            <div>
-                <label>price:</label>
-                <Field required name="price" component="input" type="number" className="price" />
-            </div>
-            <div>
-                <label>manufacturer:</label>
-                <Field required name="manufacturer" component="input" type="textarea" className="manufacturer" />
-            </div>
-            <div>
-                <label>assemblyPlace:</label>
-                <Field required name="assemblyPlace" component="input" type="textarea" className="assemblyPlace" />
-            </div>
-            <div>
-                <label>availability:</label>
-                <Field required name="availability" component="input" type="checkbox" className="availability" />
-            </div>
-            <div>
-                <label>quantity:</label>
-                <Field required name="quantity" component="input" type="number" className="quantity" />
-            </div>
-            <div>
-                <label>specificationName:</label>
-                <Field required name="specificationName" component="input" type="textarea" className="specificationName" />
-            </div>
-            <div>
-                <label>value:</label>
-                <Field required name="value" component="input" type="textarea" className="value" />
-            </div>
-        </DialogContent>
-        <DialogActions className="AddClose">
-          <Button type="submit" color="primary">
-                add news
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-               close
-          </Button>
-        </DialogActions>
-      </form>
-    )}
-  />
-);
+import {TextField} from "final-form-material-ui";
+
+const CreateCard = ({ onSubmit, handleClose }) => {
+    return (
+        <div>
+            <Form
+                // className={classes.paperWidthSm}
+                onSubmit={onSubmit}
+                render={({handleSubmit, submitting}) => (
+                    <form onSubmit={handleSubmit}>
+                        <Grid container alignItems="flex-start" spacing={2}>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="type"
+                                    component={TextField}
+                                    type="text"
+                                    label="type"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="price"
+                                    component={TextField}
+                                    type="number"
+                                    label="price"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="manufacturer"
+                                    component={TextField}
+                                    type="text"
+                                    label="manufacturer"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="assemblyPlace"
+                                    component={TextField}
+                                    type="text"
+                                    label="assemblyPlace"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="availability"
+                                    component={TextField}
+                                    type="checkbox"
+                                    label="availability"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="currentStatus"
+                                    component={TextField}
+                                    type="checkbox"
+                                    label="currentStatus"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="quantity"
+                                    component={TextField}
+                                    type="quantity"
+                                    label="price"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="specificationName"
+                                    component={TextField}
+                                    type="text"
+                                    label="specificationName"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Field
+                                    fullWidth
+                                    required
+                                    name="value"
+                                    component={TextField}
+                                    type="text"
+                                    label="value"
+                                />
+                            </Grid>
+                            <Grid item style={{marginTop: 16}}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    disabled={submitting}
+                                >
+                                    Submit
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </form>
+                )}
+            />
+        </div>
+    );
+};
 
 export default CreateCard;

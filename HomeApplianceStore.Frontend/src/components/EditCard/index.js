@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import './style.css';
 import Card from "../Card";
 
 
@@ -69,7 +68,7 @@ const CreateCard = ({ onSubmit, handleClose, initialValues }) => {
                     </div>
                     <div>
                         <label>quantity:</label>
-                        <Field required name=" quantity" component="input" type="number" className=" quantity" />
+                        <Field required name="quantity" component="input" type="number" className=" quantity" />
                     </div>
                     <div>
                         <label>specificationName:</label>

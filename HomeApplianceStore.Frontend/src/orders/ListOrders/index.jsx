@@ -13,7 +13,7 @@ import {
 } from '../../store/action/orders';
 import Modal from '../Modal';
 
-import './style.css';
+// import './style.css';
 import Dialog from '@material-ui/core/Dialog';
 import CreateCard from '../CreateCard';
 
@@ -59,7 +59,10 @@ class ListOrders extends Component {
     const { getOrders } = this.props;
     getOrder.then(res => {
       console.log('reqweqs432', res);
-      getOrders(res.data);
+      if(res.data.length>=this.props.orders.data.length ){
+        getOrders(res.data);
+      }
+
     });
   }
 

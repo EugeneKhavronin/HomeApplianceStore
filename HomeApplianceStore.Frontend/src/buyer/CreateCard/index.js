@@ -1,132 +1,273 @@
 // import React from 'react';
 // import { Form, Field } from 'react-final-form';
 //
-import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import {Field, Form} from "react-final-form";
-import DialogContent from "@material-ui/core/DialogContent";
-import Fab from "@material-ui/core/Fab";
-import DeleteIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import { Form, Field } from 'react-final-form';
+import { TextField} from 'final-form-material-ui';
 
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 600,
-        // minWidth: 1000,
-        // maxWidth: 1000,
-        // minpaperWidthSm:1000,
+import {
+    Paper,
+    Grid,
+    Button,
+    CssBaseline,
+} from '@material-ui/core';
+
+import React from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+import Dialog from '@material-ui/core/Dialog';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+
+const useStyles = makeStyles(theme => ({
+    appBar: {
+        position: 'relative',
     },
-    table: {
-        minWidth: 300,
+    title: {
+        marginLeft: theme.spacing(2),
+        flex: 1,
     },
-    fab: {
-        width: 35,
-        height: 35,
-        margin: 10,
-    },
-    paperWidthSm:{
-        maxWidth: 'lg'
-    }
+}));
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
-const CreateCard = ( {basket, onSubmit, handleClose,delLine,totalCost}) => {
+export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,handleClickOpen, handleClose, open}) {
     const classes = useStyles();
-console.log('basket11111111111', basket);
-//
     return (
-        <Form
-            className={classes.paperWidthSm}
-            totalCost={totalCost}
-            basket={basket}
-            onSubmit={onSubmit}
-            render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
-                    <Paper >
-                        <Table className={classes.table} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell align="right">type</TableCell>
-                                    <TableCell align="right">availability</TableCell>
-                                    <TableCell align="right">price</TableCell>
-                                    <TableCell align="right">quantity</TableCell>
-                                    <TableCell align="right">specificationName</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {
-                                console.log('asdasda', basket)
-                            }
-                                {basket.map((row, index) => {
-                                    console.log('row.specifications[0]', row.specifications[0].specificationName);
-                                    return(
-                                        <TableRow key={row.guid}>
-                                            <TableCell align="right">{row.type}</TableCell>
-                                            <TableCell align="right">{row.availability +''}</TableCell>
-                                            <TableCell align="right">{row.price}</TableCell>
-                                            <TableCell align="right">{row.quantity}</TableCell>
-                                            <TableCell align="right">{row.specifications[0].specificationName +''}</TableCell>
-                                            <TableCell >
-                                                <Button variant="outlined" onClick={() => delLine(index)}>
-                                                    delete
-                                                </Button>
-                                                {/*<Fab aria-label="Delete" className={classes.fab} onClick={() => delLine(index)}>*/}
-                                                {/*    <DeleteIcon />*/}
-                                                {/*</Fab>*/}
-                                            </TableCell>
+        <div>
+            {/*<Button variant="outlined" color="primary" onClick={handleClickOpen}>*/}
+            {/*   Корзина*/}
+            {/*</Button>*/}
+            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+                <AppBar className={classes.appBar}>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                            <CloseIcon />
+                        </IconButton>
+
+                    </Toolbar>
+                </AppBar>
+                <CssBaseline />
+                <Form
+                    className={classes.paperWidthSm}
+                    totalCost={totalCost}
+                    basket={basket}
+                    onSubmit={onSubmit}
+                    render={({ handleSubmit, submitting }) => (
+                        <form onSubmit={handleSubmit}>
+                            <Paper >
+                                <Table className={classes.table} aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align="right">type</TableCell>
+                                            <TableCell align="right">availability</TableCell>
+                                            <TableCell align="right">price</TableCell>
+                                            <TableCell align="right">quantity</TableCell>
+                                            <TableCell align="right">specificationName</TableCell>
+                                            <TableCell align="right"></TableCell>
                                         </TableRow>
-                                    )})}
-                            </TableBody>
-                        </Table>
-                    </Paper>
-                    <DialogContent>
-                        <div>
-                            <label>fullName:</label>
-                            <Field required name="fullName" component="input" type="text" className="title" />
-                        </div>
-                        <div>
-                            <label>email:</label>
-                            <Field required name="email" component="input" type="text" className="review" />
-                        </div>
-                        <div>
-                            <label>address:</label>
-                            <Field required name="address" component="input" type="textarea" className="text" />
-                        </div>
-                        <div>
-                            <label>phoneNumber:</label>
-                            <Field required name="phoneNumber" component="input" type="textarea" className="text" />
-                        </div>
-                        <div>
-                            <label>deliveryTerms:</label>
-                            <Field required name="deliveryTerms" component="input" type="textarea" className="deliveryTerms" />
-                        </div>
-                        <div>
-                            <label>currentStatus:</label>
-                            <Field required name="currentStatus" component="input" type="textarea" className="currentStatus" />
-                        </div>
-                        totalCost={totalCost}
-                    </DialogContent>
-                    <DialogActions className="AddClose">
-                        <Button type="submit" color="primary">
-                            Купить
-                        </Button>
-                        <Button onClick={handleClose} color="primary" autoFocus>
-                            Закрыть
-                        </Button>
-                    </DialogActions>
-                </form>
-            )}
-        />
+                                    </TableHead>
+                                    <TableBody>
+                                        {
+                                            console.log('asdasda', basket)
+                                        }
+                                        {basket.map((row, index) => {
+                                            console.log('row.specifications[0]', row.specifications[0].specificationName);
+                                            return(
+                                                <TableRow key={row.guid}>
+                                                    <TableCell align="right">{row.type}</TableCell>
+                                                    <TableCell align="right">{row.availability +''}</TableCell>
+                                                    <TableCell align="right">{row.price}</TableCell>
+                                                    <TableCell align="right">{row.quantity}</TableCell>
+                                                    <TableCell align="right">{row.specifications[0].specificationName +''}</TableCell>
+                                                    <TableCell >
+                                                        <Button variant="outlined" onClick={() => delLine(index)}>
+                                                            delete
+                                                        </Button>
+                                                        {/*<Fab aria-label="Delete" className={classes.fab} onClick={() => delLine(index)}>*/}
+                                                        {/*    <DeleteIcon />*/}
+                                                        {/*</Fab>*/}
+                                                    </TableCell>
+                                                </TableRow>
+                                            )})}
+                                    </TableBody>
+                                </Table>
+                            </Paper>
+                            totalCost={totalCost}
+                            <Grid container alignItems="flex-start" spacing={2}>
+                                <Grid item xs={6}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="fullName"
+                                        component={TextField}
+                                        type="text"
+                                        label="fullName"
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="email"
+                                        component={TextField}
+                                        type="email"
+                                        label="email"
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="address"
+                                        component={TextField}
+                                        type="text"
+                                        label="address"
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="phoneNumber"
+                                        component={TextField}
+                                        type="tel"
+                                        label="phoneNumber"
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="deliveryTerms"
+                                        component={TextField}
+                                        type="text"
+                                        label="deliveryTerms"
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="currentStatus"
+                                        component={TextField}
+                                        type="text"
+                                        label="currentStatus"
+                                    />
+                                </Grid>
+
+                                <Grid item style={{ marginTop: 16}}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        type="submit"
+                                        disabled={submitting}
+                                    >
+                                        Submit
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    )}
+                />
+            </Dialog>
+
+        </div>
+        //     className={classes.paperWidthSm}
+        //     totalCost={totalCost}
+        //     basket={basket}
+        //     onSubmit={onSubmit}
+        //     render={({ handleSubmit }) => (
+        //         <form onSubmit={handleSubmit}>
+        //             <Paper >
+        //                 <Table className={classes.table} aria-label="simple table">
+        //                     <TableHead>
+        //                         <TableRow>
+        //                             <TableCell align="right">type</TableCell>
+        //                             <TableCell align="right">availability</TableCell>
+        //                             <TableCell align="right">price</TableCell>
+        //                             <TableCell align="right">quantity</TableCell>
+        //                             <TableCell align="right">specificationName</TableCell>
+        //                         </TableRow>
+        //                     </TableHead>
+        //                     <TableBody>
+        //                         {
+        //                             console.log('asdasda', basket)
+        //                         }
+        //                         {basket.map((row, index) => {
+        //                             console.log('row.specifications[0]', row.specifications[0].specificationName);
+        //                             return(
+        //                                 <TableRow key={row.guid}>
+        //                                     <TableCell align="right">{row.type}</TableCell>
+        //                                     <TableCell align="right">{row.availability +''}</TableCell>
+        //                                     <TableCell align="right">{row.price}</TableCell>
+        //                                     <TableCell align="right">{row.quantity}</TableCell>
+        //                                     <TableCell align="right">{row.specifications[0].specificationName +''}</TableCell>
+        //                                     <TableCell >
+        //                                         <Button variant="outlined" onClick={() => delLine(index)}>
+        //                                             delete
+        //                                         </Button>
+        //                                         {/*<Fab aria-label="Delete" className={classes.fab} onClick={() => delLine(index)}>*/}
+        //                                         {/*    <DeleteIcon />*/}
+        //                                         {/*</Fab>*/}
+        //                                     </TableCell>
+        //                                 </TableRow>
+        //                             )})}
+        //                     </TableBody>
+        //                 </Table>
+        //             </Paper>
+        //             <DialogContent>
+        //                 <div>
+        //                     <label>fullName:</label>
+        //                     <Field required name="fullName" component="input" type="text" className="title" />
+        //                 </div>
+        //                 <div>
+        //                     <label>email:</label>
+        //                     <Field required name="email" component="input" type="text" className="review" />
+        //                 </div>
+        //                 <div>
+        //                     <label>address:</label>
+        //                     <Field required name="address" component="input" type="textarea" className="text" />
+        //                 </div>
+        //                 <div>
+        //                     <label>phoneNumber:</label>
+        //                     <Field required name="phoneNumber" component="input" type="textarea" className="text" />
+        //                 </div>
+        //                 <div>
+        //                     <label>deliveryTerms:</label>
+        //                     <Field required name="deliveryTerms" component="input" type="textarea" className="deliveryTerms" />
+        //                 </div>
+        //                 <div>
+        //                     <label>currentStatus:</label>
+        //                     <Field required name="currentStatus" component="input" type="textarea" className="currentStatus" />
+        //                 </div>
+        //                 totalCost={totalCost}
+        //             </DialogContent>
+        //             <DialogActions className="AddClose">
+        //                 <Button autoFocus color="inherit" type="submit">
+        //                     save
+        //                 </Button>
+        //             </DialogActions>
+        //         </form>
+        //     )}
+        // />
+        //         </Dialog>
+        //
+        //     </div>
     );
-};
-
-
-export default CreateCard;
+}
