@@ -11,6 +11,7 @@ namespace HomeApplianceStore.API.Controllers
     /// Контроллер товаров
     /// </summary>    
     [Route("api/goods")]
+    [ApiController]
     public class GoodsController : Controller
     {
         private readonly IGoodsService _goodsService;
@@ -103,9 +104,9 @@ namespace HomeApplianceStore.API.Controllers
         /// <param name="guid">Уникальный идентификатор</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task DeleteGoods(Guid guid, List<Guid> guidSpec, List<Guid> guidValue)
+        public async Task DeleteGoods(Guid guid)
         {
-            await _goodsService.Delete(guid, guidSpec, guidValue);
+            await _goodsService.Delete(guid);
         }
     }
 }
