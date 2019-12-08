@@ -87,20 +87,25 @@ namespace HomeApplianceStore.Domain.Services
         }
         
         /// <inheritdoc />
-        public async Task Delete(Guid guid, List<Guid> guidSpec, List<Guid> guidValue)
+        public async Task Delete(Guid guid)
         {
             var goods = await _context.Goods.FirstOrDefaultAsync(a => a.Guid == guid);
-            foreach (var guid1 in guidSpec)
+            var spec = _context.Goods.Where(b => b.Guid == guid)
+                .Join(_context.Specifications, c => c.Guid, d => d.Guid, (c, d) => d).ToList();
+            var value = _context.Goods.Where(e => e.Guid == guid)
+                .Join(_context.Specifications, f => f.Guid, g => g.Guid, (f, g) => f).Join(_context.SpecificationValues,
+                    h => h.Guid, i => i.Guid, (h, i) => i).ToList();
+            
+            foreach (var guid1 in value)
             {
-                var goodsSpec = await _context.Specifications.FirstOrDefaultAsync(a => a.Guid == guid1);
-                _context.Specifications.Remove(goodsSpec);
+                _context.SpecificationValues.Remove(guid1);
             }
-
-            foreach (var guid1 in guidValue)
+            
+            foreach (var guid1 in spec)
             {
-                var goodsSpecValue = await _context.SpecificationValues.FirstOrDefaultAsync(a => a.Guid == guid1);
-                _context.SpecificationValues.Remove(goodsSpecValue);
+                _context.Specifications.Remove(guid1);
             }
+            
             _context.Goods.Remove(goods);
             await _context.SaveChangesAsync();
         }
