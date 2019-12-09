@@ -38,20 +38,33 @@ class ListProducts extends Component {
   handleClickOpenEdit = (guid) => {
     const { data } = this.props.products;
 
-    console.log('guid', guid);
+    console.log('guid234', guid);
     return this.setState({ isOpenEdit: true, currentProducts: data.find((el) => el.guid === guid) });
   };
 
   handleOnCloseEdit = () => this.setState({ isOpenEdit: false });
 
   handleSubmitEditProducts = (values) => {
+    console.log('values888888888888888888888888',values);
     const { editProducts } = this.props;
-
-    console.log('values', values);
-    editProducts(values);
+const current = this.state.currentProducts;
+   current.type = values.type;
+    current.assemblyPlace = values.assemblyPlace;
+    current.availability = values.availability;
+    current.manufacturer = values.manufacturer;
+    current.price = values.price;
+    current.quantity = values.quantity;
+    current.specifications[0].specificationName = values.specificationName;
+    current.specifications[0].specificationValue.value = values.value;
+    // current.manufacturer = values.manufacturer;
+    // current.manufacturer = values.manufacturer;
+    // current.type = values.type;
+   console.log('current',current);
+    console.log('c111111u2222222rrentProducts', this.state.currentProducts);
+    editProducts(current);
     this.setState({ isOpenEdit: false });
-    editGoods(values).then(values=> {
-      console.log('editClient', values);
+    editGoods(current).then(current=> {
+      console.log('editClient', current);
 
     });
   };
@@ -149,8 +162,10 @@ console.log('data',data);
         ))}
         <Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit}>
           <EditCard
+              // handleClickOpen={this.handleClickOpenEdit}
+              isOpen={isOpenEdit}
             initialValues={currentProducts}
-            handleClose={this.handleOnCloseEdit}
+              onClose={this.handleOnCloseEdit}
             onSubmit={this.handleSubmitEditProducts}
           />
         </Modal>
@@ -194,19 +209,20 @@ console.log('data',data);
         </Modal>
         <div>
 
-          <Button
-            type="button"
-            className="button-add"
-            onClick={this.handleClickOpenAdd}
-          >
-            Добавление товаров
-          </Button>
-          <Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd}>
-            <CreateCard
+          {/*<Button*/}
+          {/*  type="button"*/}
+          {/*  className="button-add"*/}
+          {/*  onClick={this.handleClickOpenAdd}*/}
+          {/*>*/}
+          {/*  Добавление товаров*/}
+          {/*</Button>*/}
+          <CreateCard
+              open={isOpenAdd}
               onSubmit={this.handleSubmitAddProductsAdd}
               handleClose={this.handleOnCloseAdd}
-            />
-          </Dialog>
+              onClose={this.handleOnCloseAdd}
+              handleClickOpen={this. handleClickOpenAdd}
+          />
         </div>
       </div>
     );
