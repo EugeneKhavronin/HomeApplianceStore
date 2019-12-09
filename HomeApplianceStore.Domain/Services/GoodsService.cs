@@ -69,7 +69,7 @@ namespace HomeApplianceStore.Domain.Services
         /// <inheritdoc />
         public async Task<Guid> Update(Goods model)
         {
-            var goods = await _context.Goods.Include(a => a.Specifications)
+            var goods = await _context.Goods.AsNoTracking().Include(a => a.Specifications)
                 .ThenInclude(a => a.SpecificationValue).FirstOrDefaultAsync(a => a.Guid == model.Guid);
             goods.OrderGuid = model.OrderGuid;
             goods.Availability = model.Availability;
@@ -77,8 +77,8 @@ namespace HomeApplianceStore.Domain.Services
             goods.Manufacturer = model.Manufacturer;
             goods.Price = model.Price;
             goods.Quantity = model.Quantity;
-            _context.Entry(goods).State = EntityState.Modified;
-            //goods.Specifications = model.Specifications;
+            //_context.Entry(goods).State = EntityState.Modified;
+            goods.Specifications = model.Specifications;
             goods.Type = model.Type;
             goods.AssemblyPlace = model.AssemblyPlace;
             _context.Goods.Update(goods);
