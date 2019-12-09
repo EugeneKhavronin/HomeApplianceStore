@@ -94,17 +94,22 @@
 //
 //
 // export default CreateCard;
-
+//
 
 
 import { Form, Field } from 'react-final-form';
 
 import {CssBaseline, Grid, makeStyles, Paper, FormControlLabel} from "@material-ui/core";
-//
+
 import { TextField, Checkbox, Radio, Select } from "final-form-material-ui";
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -115,11 +120,15 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => {
+const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
+
     console.log('initialValues ',initialValues );
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     // const [fullWidth, setFullWidth] = React.useState(true);
+    const handleClose = () => {
+        setOpen(false);
+    };
     const [maxWidth, setMaxWidth] = React.useState('xs');
     const [maxHeight, setMaxHeight] = React.useState('lg');
     return (
@@ -131,6 +140,14 @@ const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => 
                 onClose={handleClose}
                 aria-labelledby="max-width-dialog-title"
             >
+                {/*<AppBar className={classes.appBar}>*/}
+                {/*    <Toolbar>*/}
+                {/*        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">*/}
+                {/*            <CloseIcon />*/}
+                {/*        </IconButton>*/}
+
+                {/*    </Toolbar>*/}
+                {/*</AppBar>*/}
                 <div>
                     <Form
                         className={classes.form}
@@ -139,73 +156,79 @@ const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => 
                             <form onSubmit={handleSubmit}>
                                 <Grid container alignItems="flex-start" spacing={0}>
                                     <Grid item xs={10} style={{margin: 10}}>
-                                        2222222222222222222222222
                                         <Field
+                                            fullWidth
                                             required
                                             name="type"
                                             component={TextField}
                                             type="text"
-                                            label="type"
+                                            label="тип товара"
                                              defaultValue={initialValues.type}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
                                         <Field
+                                            fullWidth
                                             required
                                             name="price"
                                             component={TextField}
                                             type="number"
-                                            label="price"
+                                            label="цена "
                                             defaultValue={initialValues.price}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
                                         <Field
+                                            fullWidth
                                             required
                                             name="quantity"
                                             component={TextField}
                                             type="number"
-                                            label="quantity"
+                                            label="количество на складе"
                                             defaultValue={initialValues.quantity}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
                                         <Field
+                                            fullWidth
                                             required
                                             name="manufacturer"
                                             component={TextField}
                                             type="text"
-                                            label="manufacturer"
+                                            label="производитель"
                                             defaultValue={initialValues.manufacturer}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
                                         <Field
+                                            fullWidth
                                             required
                                             name="assemblyPlace"
                                             component={TextField}
                                             type="text"
-                                            label="assemblyPlace"
+                                            label="страна производства"
                                             defaultValue={initialValues.assemblyPlace}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
                                         <Field
+                                            fullWidth
                                             required
                                             name="specificationName"
                                             component={TextField}
                                             type="text"
-                                            label="specificationName"
+                                            label="характеристика товара"
                                             defaultValue={initialValues.specifications[0].specificationName}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
                                         <Field
+                                            fullWidth
                                             required
                                             name="value"
                                             component={TextField}
                                             type="text"
-                                            label="value"
+                                            label="значение"
                                             defaultValue={initialValues.specifications[0].specificationValue.value}
                                         />
                                     </Grid>
@@ -214,7 +237,7 @@ const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => 
                                             label="availability"
                                             control={
                                                 <Field
-                                                    name="availability"
+                                                    name="наличие"
                                                     component={Checkbox}
                                                     type="checkbox"
                                                     defaultValue={initialValues.availability}
@@ -229,7 +252,7 @@ const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => 
                                             type="submit"
                                             disabled={submitting}
                                         >
-                                            Добавить продукт
+                                            Редактировать продукт
                                         </Button>
                                     </Grid>
                                 </Grid>

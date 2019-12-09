@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 
 const useStyles = makeStyles({
@@ -48,38 +49,38 @@ console.log('value',value);
       <>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            type:
+            тип товара:
             {type}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            price:
+            цена:
             { price}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            manufacturer:
+            производитель:
             {manufacturer}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            quantity:
+            количество:
             {quantity}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            assemblyPlace:
+            страна производства:
             {assemblyPlace}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            specificationName:
+            характеристика товара:
             {specificationName}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            value:
+            значение:
             {value}
           </Typography>
         </CardContent>
       </>
       <CardActions className={classes.cardAction}>
         <Button size="small" color="primary" onClick={() => handleClickOpenM(guid)} className={classes.info}>
-          information
+        подробная информация
         </Button>
         <div>
           <Fab aria-label="Edit" className={classes.fab} onClick={() => handleClickOpenE(guid)}>

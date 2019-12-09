@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 });
 
 export default function MediaCard({
-                                    guid,  fullName, email, address, phoneNumber, orders, delOrders, handleClickOpenM, handleClickOpenE,
+                                    guid,  totalCost, delOrders, handleClickOpenM, handleClickOpenE,
 }) {
   const classes = useStyles();
 
@@ -51,15 +51,15 @@ export default function MediaCard({
       <>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            ФИО
+            Общая стоимость
             {' '}
-            {fullName}
+            {totalCost}
           </Typography>
         </CardContent>
       </>
       <CardActions className={classes.cardAction}>
         <Button size="small" color="primary" onClick={() => handleClickOpenM(guid)} className={classes.info}>
-          information
+          подробная информация
         </Button>
         <div>
           <Fab aria-label="Edit" className={classes.fab} onClick={() => handleClickOpenE(guid)}>

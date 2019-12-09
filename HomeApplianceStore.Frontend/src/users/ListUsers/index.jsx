@@ -12,7 +12,7 @@ import {
   deleteUsers, getUsers, editUsers, addUsers,
 } from '../../store/action/users';
 import Modal from '../Modal';
-
+import './style.css';
 import Dialog from '@material-ui/core/Dialog';
 import CreateCard from '../CreateCard';
 
@@ -43,12 +43,22 @@ class ListUsers extends Component {
   handleOnCloseEdit = () => this.setState({ isOpenEdit: false });
 
   handleSubmitEditUsers = (values) => {
+    const current = this.state.currentUsers;
+    current.address= values.address;
+    current.email = values.email;
+    current.fullName = values.fullName;
+    current.phoneNumber = values.phoneNumber;
+    // current.manufacturer = values.manufacturer;
+    // current.manufacturer = values.manufacturer;
+    // current.type = values.type;
+    console.log('current',current);
+    console.log('c111111u2222222rrentProducts', this.state.currentUsers);
     const { editUsers } = this.props;
     console.log('editClient', values);
-    editUsers(values);
+    editUsers(current );
     this.setState({isOpenEdit: false})
-    editClient(values).then(values=> {
-      console.log('editClient', values);
+    editClient(current ).then(current => {
+      console.log('editClient', current );
 
     });
   };
@@ -110,6 +120,14 @@ class ListUsers extends Component {
     return (
 
       <div className="AllCard">
+        <CreateCard
+            open={isOpenAdd}
+            onSubmit={this.handleSubmitAddUsersAdd}
+            handleClose={this.handleOnCloseAdd}
+            onClose={this.handleOnCloseAdd}
+            handleClickOpen={this. handleClickOpenAdd}
+        />
+        <div style={{width: 1000}}></div>
         {data.map(({
                      guid,  fullName, email, address, phoneNumber, orders,
         }) => (
@@ -127,14 +145,22 @@ class ListUsers extends Component {
             handleClickOpenM={this.handleClickOpenInfo}
           />
         ))}
-        <Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit} style={{ height: 800, marginBottom: 15 }}>
+        {/*<Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit} style={{ height: 800, marginBottom: 15 }}>*/}
+        {/*  <EditCard*/}
+        {/*    initialValues={currentUsers}*/}
+        {/*    handleClose={this.handleOnCloseEdit}*/}
+        {/*    onSubmit={this.handleSubmitEditUsers}*/}
+        {/*  />*/}
+        {/*</Modal>*/}
+        <Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit}>
           <EditCard
-            initialValues={currentUsers}
-            handleClose={this.handleOnCloseEdit}
-            onSubmit={this.handleSubmitEditUsers}
+              // handleClickOpen={this.handleClickOpenEdit}
+              isOpen={isOpenEdit}
+              initialValues={currentUsers}
+              onClose={this.handleOnCloseEdit}
+              onSubmit={this.handleSubmitEditUsers}
           />
         </Modal>
-
         <Modal isOpen={isOpenMore} handleClose={this.handleOnCloseInfo} id="modal" >
           <DialogTitle>
             ФИО
@@ -154,30 +180,26 @@ class ListUsers extends Component {
               телефон:
               {phoneNumber}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              заказы:
-              {orders}
-            </Typography>
           </DialogContent>
           <Button onClick={this.handleOnCloseInfo} color="primary" autoFocus>
               Close
           </Button>
         </Modal>
         <div>
-          <Button
-            type="button"
-            className="button-add"
-            onClick={this.handleClickOpenAdd}
-            color="primary"
-          >
-            Добавление пользователей
-          </Button>
-          <Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd} style={{ height: 800, marginBottom: 15 }}>
-            <CreateCard
-              onSubmit={this.handleSubmitAddUsersAdd}
-              handleClose={this.handleOnCloseAdd}
-            />
-          </Dialog>
+          {/*<Button*/}
+          {/*  type="button"*/}
+          {/*  className="button-add"*/}
+          {/*  onClick={this.handleClickOpenAdd}*/}
+          {/*  color="primary"*/}
+          {/*>*/}
+          {/*  Добавление пользователей*/}
+          {/*</Button>*/}
+          {/*<Dialog open={isOpenAdd} onClose={this.handleOnCloseAdd} style={{ height: 800, marginBottom: 15 }}>*/}
+          {/*  <CreateCard*/}
+          {/*    onSubmit={this.handleSubmitAddUsersAdd}*/}
+          {/*    handleClose={this.handleOnCloseAdd}*/}
+          {/*  />*/}
+          {/*</Dialog>*/}
         </div>
       </div>
     )

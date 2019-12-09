@@ -26,20 +26,21 @@ export default class App extends Component {
             <div>
             <header className="header-back">
               <nav>
-              <div className="titleNews">Интернет магазин бытовой техники </div>
+                <div className="titleNews"> <div className="titleN"> Интернет магазин бытовой техники </div>
 
                 <Button variant="contained" color="primary" className="linkAdmin">
-                  <Link to="/admin" style={{ textDecoration: 'none', color:'white'}} >admin</Link>
+                  <Link to="/admin" style={{ textDecoration: 'none', color:'white'}} >управление товарами</Link>
                 </Button>
                 <Button variant="contained" color="primary" className="linkUsers">
-                  <Link to="/users" style={{ textDecoration: 'none',color:'white'}} >users</Link>
+                  <Link to="/users" style={{ textDecoration: 'none',color:'white'}} >управление пользователями</Link>
                 </Button>
                 <Button variant="contained" color="primary" className="linkClient">
-                  <Link to="/buyer" style={{ textDecoration: 'none', color:'white'}} >buyer</Link>
+                  <Link to="/buyer" style={{ textDecoration: 'none', color:'white'}} >страница покупателя</Link>
                 </Button>
                 <Button variant="contained" color="primary" className="linkOrders">
-                  <Link to="/orders" style={{ textDecoration: 'none', color:'white'}} >orders</Link>
+                  <Link to="/orders" style={{ textDecoration: 'none', color:'white'}} >страница бухгалтера</Link>
                 </Button>
+              </div>
               </nav>
             </header>
               {/* A <Switch> looks through its children <Route>s and

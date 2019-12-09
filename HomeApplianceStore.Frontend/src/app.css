@@ -19,3 +19,32 @@
 /*    top: -53px;*/
 /*    left: 770px;*/
 /*}*/
+
+.titleNews{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 100px;
+}
+.titleN{
+    margin: 15px;
+    font-family: "Franklin Gothic Medium";
+    font-size: xx-large;
+    color: cadetblue;
+}
+
+.header-back{
+    min-height: 100px;
+    background-color: azure;
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+    /*align-items: center;*/
+}
+
+Button{
+    margin: 15px;
+}
+#search-and-basket{
+    display: flex;
+    justify-content: space-around;
+}

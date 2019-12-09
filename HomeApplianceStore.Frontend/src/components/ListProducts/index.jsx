@@ -140,9 +140,18 @@ console.log('data',data);
     return (
 
       <div className="AllCard">
+          <CreateCard
+              open={isOpenAdd}
+              onSubmit={this.handleSubmitAddProductsAdd}
+              handleClose={this.handleOnCloseAdd}
+              onClose={this.handleOnCloseAdd}
+              handleClickOpen={this. handleClickOpenAdd}
+          />
+          <div style={{width: 1000}}></div>
         {data.map(({
                      guid, type, price, manufacturer, assemblyPlace, quantity, specifications,availability
         }) => (
+
           <Card
             id="card"
             key={guid}
@@ -169,33 +178,39 @@ console.log('data',data);
             onSubmit={this.handleSubmitEditProducts}
           />
         </Modal>
-
+        {/*<Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit}>*/}
+        {/*  <EditCard*/}
+        {/*      initialValues={currentProducts}*/}
+        {/*      handleClose={this.handleOnCloseEdit}*/}
+        {/*      onSubmit={this.handleSubmitEditProducts}*/}
+        {/*  />*/}
+        {/*</Modal>*/}
         <Modal isOpen={isOpenMore} handleClose={this.handleOnCloseInfo} id="modal">
           <DialogTitle>
-            type
+            тип товара
             {' '}
             {type}
           </DialogTitle>
           <DialogContent style={{ width: 200, marginBottom: 15 }}>
             <Typography variant="body2" color="textSecondary" component="p">
-              price
+              цена
               {' '}
               {price}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              manufacturer:
+              производитель:
               {manufacturer}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              assemblyPlace:
+              страна производства:
               {assemblyPlace}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              availability:
+              наличие:
               {availability}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              quantity:
+              количество на складе:
               { quantity}
             </Typography>
             {/*<Typography variant="body2" color="textSecondary" component="p">*/}
@@ -216,13 +231,7 @@ console.log('data',data);
           {/*>*/}
           {/*  Добавление товаров*/}
           {/*</Button>*/}
-          <CreateCard
-              open={isOpenAdd}
-              onSubmit={this.handleSubmitAddProductsAdd}
-              handleClose={this.handleOnCloseAdd}
-              onClose={this.handleOnCloseAdd}
-              handleClickOpen={this. handleClickOpenAdd}
-          />
+
         </div>
       </div>
     );

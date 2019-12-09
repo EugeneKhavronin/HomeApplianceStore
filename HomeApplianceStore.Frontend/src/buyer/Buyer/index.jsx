@@ -169,6 +169,7 @@ console.log('this.state.currentProducts',this.state.currentProducts);
     return (
 
       <div className="AllCard">
+          <div id="search-and-basket">
           <FormControl   >
               <InputLabel>Поиск</InputLabel>
               <Input
@@ -188,6 +189,7 @@ console.log('this.state.currentProducts',this.state.currentProducts);
           >
               <ShoppingCartIcon/>
           </Button>
+          </div>
         {data.map(({
                      guid, type, price, manufacturer, assemblyPlace, quantity, specifications,
         }) => (

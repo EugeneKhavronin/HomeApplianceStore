@@ -48,31 +48,31 @@ export default function MediaCard({
         <>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              type:
+              тип товара:
               {type}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              price:
+             цена:
               { price}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              manufacturer:
+              производитель:
               {manufacturer}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              quantity:
+              количество на складе:
               {quantity}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              assemblyPlace:
+              страна производства:
               {assemblyPlace}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              specificationName:
+              характеристика товара:
               {specificationName}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              value:
+             значение:
               {value}
             </Typography>
           </CardContent>

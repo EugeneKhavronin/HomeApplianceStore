@@ -59,7 +59,7 @@ export default function MediaCard({
       </>
       <CardActions className={classes.cardAction}>
         <Button size="small" color="primary" onClick={() => handleClickOpenM(guid)} className={classes.info}>
-          information
+          подробная информация
         </Button>
         <div>
           <Fab aria-label="Edit" className={classes.fab} onClick={() => handleClickOpenE(guid)}>

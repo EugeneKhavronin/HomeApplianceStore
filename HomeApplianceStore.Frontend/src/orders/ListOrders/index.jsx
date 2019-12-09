@@ -13,7 +13,7 @@ import {
 } from '../../store/action/orders';
 import Modal from '../Modal';
 
-// import './style.css';
+import './style.css';
 import Dialog from '@material-ui/core/Dialog';
 import CreateCard from '../CreateCard';
 
@@ -44,12 +44,20 @@ class ListOrders extends Component {
   handleOnCloseEdit = () => this.setState({ isOpenEdit: false });
 
   handleSubmitEditOrders = (values) => {
+    console.log('editClient12312321312312313', values);
+    const current = this.state.currentOrders;
+    current.currentStatus= values.currentStatus;
+    current.dateTimeOrder = values.dateTimeOrder;
+    current.deliveryTerms = values.deliveryTerms;
+    current.totalCost = values.totalCost;
+    console.log('current',current);
+    console.log('c111111u2222222rrentProducts', this.state.currentUsers);
     const { editOrders } = this.props;
     console.log('editClient', values);
-    editOrders(values);
+    editOrders(current);
     this.setState({isOpenEdit: false})
-    editOrder(values).then(values=> {
-      console.log('editOrders', values);
+    editOrder(current).then(current=> {
+      console.log('editOrders', current);
 
     });
   };
@@ -125,14 +133,22 @@ class ListOrders extends Component {
             handleClickOpenM={this.handleClickOpenInfo}
           />
         ))}
-        <Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit} style={{ height: 800, marginBottom: 15 }}>
+        {/*<Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit} style={{ height: 800, marginBottom: 15 }}>*/}
+        {/*  <EditCard*/}
+        {/*    initialValues={currentOrders}*/}
+        {/*    handleClose={this.handleOnCloseEdit}*/}
+        {/*    onSubmit={this.handleSubmitEditOrders}*/}
+        {/*  />*/}
+        {/*</Modal>*/}
+        <Modal isOpen={isOpenEdit} handleClose={this.handleOnCloseEdit}>
           <EditCard
-            initialValues={currentOrders}
-            handleClose={this.handleOnCloseEdit}
-            onSubmit={this.handleSubmitEditOrders}
+              // handleClickOpen={this.handleClickOpenEdit}
+              isOpen={isOpenEdit}
+              initialValues={currentOrders}
+              onClose={this.handleOnCloseEdit}
+              onSubmit={this.handleSubmitEditOrders}
           />
         </Modal>
-
         <Modal isOpen={isOpenMore} handleClose={this.handleOnCloseInfo} id="modal" >
           <DialogTitle>
             общая стоимость:

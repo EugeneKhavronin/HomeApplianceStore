@@ -1,0 +1,8 @@
+.AllCard{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 30px;
+    justify-content: center;
+}

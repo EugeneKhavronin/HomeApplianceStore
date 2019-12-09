@@ -10,7 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Form, Field } from 'react-final-form';
 import { TextField} from 'final-form-material-ui';
-
+import './style.css';
 import {
     Paper,
     Grid,
@@ -74,11 +74,11 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                 <Table className={classes.table} aria-label="simple table">
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell align="right">type</TableCell>
-                                            <TableCell align="right">availability</TableCell>
-                                            <TableCell align="right">price</TableCell>
-                                            <TableCell align="right">quantity</TableCell>
-                                            <TableCell align="right">specificationName</TableCell>
+                                            <TableCell align="right">тип товара</TableCell>
+                                            <TableCell align="right">производитель</TableCell>
+                                            <TableCell align="right">цена</TableCell>
+                                            <TableCell align="right">характеристика</TableCell>
+                                            <TableCell align="right">значение</TableCell>
                                             <TableCell align="right"></TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -91,10 +91,10 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                             return(
                                                 <TableRow key={row.guid}>
                                                     <TableCell align="right">{row.type}</TableCell>
-                                                    <TableCell align="right">{row.availability +''}</TableCell>
-                                                    <TableCell align="right">{row.price}</TableCell>
-                                                    <TableCell align="right">{row.quantity}</TableCell>
+                                                    <TableCell align="right">{row.manufacturer +''}</TableCell>
+                                                    <TableCell align="right">{row.price+''}</TableCell>
                                                     <TableCell align="right">{row.specifications[0].specificationName +''}</TableCell>
+                                                    <TableCell align="right">{row.specifications[0].specificationValue.value+''}</TableCell>
                                                     <TableCell >
                                                         <Button variant="outlined" onClick={() => delLine(index)}>
                                                             delete
@@ -108,7 +108,6 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                     </TableBody>
                                 </Table>
                             </Paper>
-                            totalCost={totalCost}
                             <Grid container alignItems="flex-start" spacing={2}>
                                 <Grid item xs={6}>
                                     <Field
@@ -117,7 +116,7 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         name="fullName"
                                         component={TextField}
                                         type="text"
-                                        label="fullName"
+                                        label="ФИО"
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -137,7 +136,7 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         name="address"
                                         component={TextField}
                                         type="text"
-                                        label="address"
+                                        label="адрес"
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -147,7 +146,7 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         name="phoneNumber"
                                         component={TextField}
                                         type="tel"
-                                        label="phoneNumber"
+                                        label="телефон"
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -157,7 +156,7 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         name="deliveryTerms"
                                         component={TextField}
                                         type="text"
-                                        label="deliveryTerms"
+                                        label="условия доставки"
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -167,10 +166,13 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         name="currentStatus"
                                         component={TextField}
                                         type="text"
-                                        label="currentStatus"
+                                        label="текущий статус"
                                     />
                                 </Grid>
 
+                                <Grid item xs={6}>
+                                    <div className='cost'>Итоговая стоимость: {totalCost}</div>
+                                </Grid>
                                 <Grid item style={{ marginTop: 16}}>
                                     <Button
                                         variant="contained"
@@ -178,7 +180,7 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         type="submit"
                                         disabled={submitting}
                                     >
-                                        Submit
+                                        Оформить заказ
                                     </Button>
                                 </Grid>
                             </Grid>
