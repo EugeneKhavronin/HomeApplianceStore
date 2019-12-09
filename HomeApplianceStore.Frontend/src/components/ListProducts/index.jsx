@@ -147,7 +147,7 @@ console.log('data',data);
               onClose={this.handleOnCloseAdd}
               handleClickOpen={this. handleClickOpenAdd}
           />
-          <div style={{width: 1000}}></div>
+          <div style={{width: 10000}}></div>
         {data.map(({
                      guid, type, price, manufacturer, assemblyPlace, quantity, specifications,availability
         }) => (

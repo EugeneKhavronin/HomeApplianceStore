@@ -190,6 +190,7 @@ console.log('this.state.currentProducts',this.state.currentProducts);
               <ShoppingCartIcon/>
           </Button>
           </div>
+          <div style={{width: 10000}}></div>
         {data.map(({
                      guid, type, price, manufacturer, assemblyPlace, quantity, specifications,
         }) => (

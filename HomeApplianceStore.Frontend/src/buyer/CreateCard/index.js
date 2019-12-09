@@ -96,12 +96,21 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                                     <TableCell align="right">{row.specifications[0].specificationName +''}</TableCell>
                                                     <TableCell align="right">{row.specifications[0].specificationValue.value+''}</TableCell>
                                                     <TableCell >
-                                                        <Button variant="outlined" onClick={() => delLine(index)}>
-                                                            delete
+                                                        {/*<Button variant="outlined" onClick={() => delLine(index)}>*/}
+                                                        {/*    delete*/}
+                                                        {/*</Button>*/}
+                                                        {/*<Button*/}
+                                                        {/*    variant="contained"*/}
+                                                        {/*    color="primary"*/}
+                                                        {/*    nClick={() => delLine(index)} >*/}
+                                                        {/*    Оформить заказ*/}
+                                                        {/*</Button>*/}
+                                                        <Button
+                                                            variant="contained"
+                                                            color="primary"
+                                                            onClick={() => delLine(index)} >
+                                                            Удалить из корзины
                                                         </Button>
-                                                        {/*<Fab aria-label="Delete" className={classes.fab} onClick={() => delLine(index)}>*/}
-                                                        {/*    <DeleteIcon />*/}
-                                                        {/*</Fab>*/}
                                                     </TableCell>
                                                 </TableRow>
                                             )})}

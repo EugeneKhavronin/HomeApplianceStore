@@ -127,7 +127,7 @@ class ListUsers extends Component {
             onClose={this.handleOnCloseAdd}
             handleClickOpen={this. handleClickOpenAdd}
         />
-        <div style={{width: 1000}}></div>
+        <div style={{width: 10000}}></div>
         {data.map(({
                      guid,  fullName, email, address, phoneNumber, orders,
         }) => (
