@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using System.Reflection;
+using HomeApplianceStore.Database;
+using HomeApplianceStore.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace HomeApplianceStore.API
 {
@@ -22,10 +23,28 @@ namespace HomeApplianceStore.API
 
         public IConfiguration Configuration { get; }
 
+        //"DefaultConnection": "Host=database;Port=5432;Username=postgres;Password=root;Database=HomeApplianceStoreDB"
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDomain();
+            
+            services.AddEntityFrameworkNpgsql().AddDbContext<DatabaseContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly("HomeApplianceStore.API")));
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                    {Title = "HomeApplianceStore", Version = "v1"});
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +60,14 @@ namespace HomeApplianceStore.API
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors();
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HomeApplianceStore V1");
+            });
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
