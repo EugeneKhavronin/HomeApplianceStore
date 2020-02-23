@@ -65,6 +65,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         // margin: '20',
         width: 'fit-content',
+        maxLength: 10,
     },
     fab: {
         width: 35,
@@ -101,14 +102,18 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                         render={({handleSubmit, submitting}) => (
                             <form onSubmit={handleSubmit}>
                                 <Grid container alignItems="flex-start" spacing={0}>
-                                    <Grid item xs={10} style={{margin: 10}}>
+                                    <Grid item xs={10} style={{margin: 10}} >
                                         <Field
                                             fullWidth
                                             required
                                             name="fullName"
                                             component={TextField}
+                                            maxLength="5"
                                             type="text"
                                             label="ФИО"
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,50)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -119,6 +124,9 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                             component={TextField}
                                             type="email"
                                             label="почта"
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -129,6 +137,9 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                             component={TextField}
                                             type="text"
                                             label="адрес"
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -139,6 +150,9 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                             component={TextField}
                                             type="tel"
                                             label="телефон"
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item style={{margin:'10%'}}>

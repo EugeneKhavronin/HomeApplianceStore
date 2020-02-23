@@ -103,6 +103,9 @@ const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => 
                                             type="text"
                                             label="ФИО"
                                             defaultValue={initialValues.fullName}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,50)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -114,6 +117,9 @@ const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => 
                                             type="email"
                                             label="почта"
                                             defaultValue={initialValues.email}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -125,6 +131,9 @@ const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => 
                                             type="text"
                                             label="адресс"
                                             defaultValue={initialValues.address}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -136,6 +145,9 @@ const CreateCard = ({ onSubmit, handleClose,handleClickOpen,initialValues }) => 
                                             type="tel"
                                             label="телефон"
                                             defaultValue={initialValues.phoneNumber}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item style={{marginTop: 16}}>

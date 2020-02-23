@@ -68,6 +68,9 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                                 component={TextField}
                                                 type="text"
                                                 label="тип товара"
+                                                onInput = {(e) =>{
+                                                    e.target.value = e.target.value.toString().slice(0,30)
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={10} style={{margin: 10}}>
@@ -78,6 +81,12 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                                 component={TextField}
                                                 type="number"
                                                 label="цена "
+                                                onInput = {(e) =>{
+                                                    if(e.target.value < 0){
+                                                        e.target.value = e.target.value.toString().slice(e.target.value.indexOf('-'),1)
+                                                    }
+                                                    e.target.value = e.target.value.toString().slice(0,30)
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={10} style={{margin: 10}}>
@@ -87,7 +96,15 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                                 name="quantity"
                                                 component={TextField}
                                                 type="number"
+                                                 // InputProps={{ inputProps: { min: 0  } }}
                                                 label="количество на складе"
+
+                                                onInput = {(e) =>{
+                                                    if(e.target.value < 0){
+                                                        e.target.value = e.target.value.toString().slice(e.target.value.indexOf('-'),1)
+                                                    }
+                                                    e.target.value = e.target.value.toString().slice(0,30)
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={10} style={{margin: 10}}>
@@ -98,6 +115,9 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                                 component={TextField}
                                                 type="text"
                                                 label="производитель"
+                                                onInput = {(e) =>{
+                                                    e.target.value = e.target.value.toString().slice(0,30)
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={10} style={{margin: 10}}>
@@ -108,6 +128,9 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                                 component={TextField}
                                                 type="text"
                                                 label="страна производства"
+                                                onInput = {(e) =>{
+                                                    e.target.value = e.target.value.toString().slice(0,30)
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={10} style={{margin: 10}}>
@@ -118,6 +141,9 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                                 component={TextField}
                                                 type="text"
                                                 label="характеристика товара"
+                                                onInput = {(e) =>{
+                                                    e.target.value = e.target.value.toString().slice(0,30)
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={10} style={{margin: 10}}>
@@ -128,6 +154,9 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                                 component={TextField}
                                                 type="text"
                                                 label="значение"
+                                                onInput = {(e) =>{
+                                                    e.target.value = e.target.value.toString().slice(0,30)
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={10} style={{margin: 10}}>

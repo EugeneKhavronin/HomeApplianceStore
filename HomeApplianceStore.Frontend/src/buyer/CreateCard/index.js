@@ -126,6 +126,9 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         component={TextField}
                                         type="text"
                                         label="ФИО"
+                                        onInput = {(e) =>{
+                                            e.target.value = e.target.value.toString().slice(0,50)
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -136,6 +139,9 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         component={TextField}
                                         type="email"
                                         label="email"
+                                        onInput = {(e) =>{
+                                            e.target.value = e.target.value.toString().slice(0,30)
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -146,6 +152,9 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         component={TextField}
                                         type="text"
                                         label="адрес"
+                                        onInput = {(e) =>{
+                                            e.target.value = e.target.value.toString().slice(0,30)
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -156,6 +165,9 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         component={TextField}
                                         type="tel"
                                         label="телефон"
+                                        onInput = {(e) =>{
+                                            e.target.value = e.target.value.toString().slice(0,30)
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -166,6 +178,9 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         component={TextField}
                                         type="text"
                                         label="условия доставки"
+                                        onInput = {(e) =>{
+                                            e.target.value = e.target.value.toString().slice(0,30)
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -176,6 +191,9 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         component={TextField}
                                         type="text"
                                         label="текущий статус"
+                                        onInput = {(e) =>{
+                                            e.target.value = e.target.value.toString().slice(0,30)
+                                        }}
                                     />
                                 </Grid>
 

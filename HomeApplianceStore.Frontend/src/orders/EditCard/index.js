@@ -116,6 +116,12 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="number"
                                             label="общая стоимость"
                                             defaultValue={initialValues.totalCost}
+                                            onInput = {(e) =>{
+                                                if(e.target.value < 0){
+                                                    e.target.value = e.target.value.toString().slice(e.target.value.indexOf('-'),1)
+                                                }
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -127,6 +133,9 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="text"
                                             label="дата оформления"
                                             defaultValue={initialValues.dateTimeOrder}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -138,6 +147,9 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="text"
                                             label="Условия доставки"
                                             defaultValue={initialValues.deliveryTerms}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -149,6 +161,9 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="text"
                                             label="Текуший статус"
                                             defaultValue={initialValues.currentStatus}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item style={{marginTop: 16}}>

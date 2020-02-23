@@ -176,7 +176,7 @@ console.log('this.state.currentProducts',this.state.currentProducts);
                   onChange={this.search}
                   id="input-with-icon-adornment"
                   startAdornment={
-                      <InputAdornment position="start">
+                      <InputAdornment position="end">
                           <SearchIcon />
                       </InputAdornment>
                   }

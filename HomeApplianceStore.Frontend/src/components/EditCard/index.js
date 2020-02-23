@@ -164,6 +164,9 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="text"
                                             label="тип товара"
                                              defaultValue={initialValues.type}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -175,6 +178,12 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="number"
                                             label="цена "
                                             defaultValue={initialValues.price}
+                                            onInput = {(e) =>{
+                                                if(e.target.value < 0){
+                                                    e.target.value = e.target.value.toString().slice(e.target.value.indexOf('-'),1)
+                                                }
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -186,6 +195,12 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="number"
                                             label="количество на складе"
                                             defaultValue={initialValues.quantity}
+                                            onInput = {(e) =>{
+                                                if(e.target.value < 0){
+                                                    e.target.value = e.target.value.toString().slice(e.target.value.indexOf('-'),1)
+                                                }
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -197,6 +212,9 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="text"
                                             label="производитель"
                                             defaultValue={initialValues.manufacturer}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -208,6 +226,9 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="text"
                                             label="страна производства"
                                             defaultValue={initialValues.assemblyPlace}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -219,6 +240,9 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             type="text"
                                             label="характеристика товара"
                                             defaultValue={initialValues.specifications[0].specificationName}
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                         />
                                     </Grid>
                                     <Grid item xs={10} style={{margin: 10}}>
@@ -229,6 +253,9 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             component={TextField}
                                             type="text"
                                             label="значение"
+                                            onInput = {(e) =>{
+                                                e.target.value = e.target.value.toString().slice(0,30)
+                                            }}
                                             defaultValue={initialValues.specifications[0].specificationValue.value}
                                         />
                                     </Grid>
