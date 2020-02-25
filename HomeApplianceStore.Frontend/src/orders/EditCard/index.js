@@ -162,7 +162,8 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             label="Текуший статус"
                                             defaultValue={initialValues.currentStatus}
                                             onInput = {(e) =>{
-                                                e.target.value = e.target.value.toString().slice(0,30)
+                                                e.target.value = e.target.value.toString().slice(0,30);
+                                                e.target.value= e.target.value.replace(/[0-9]/g, '');
                                             }}
                                         />
                                     </Grid>

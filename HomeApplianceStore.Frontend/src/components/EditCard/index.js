@@ -227,7 +227,8 @@ const CreateCard = ({ onSubmit,handleClickOpen,initialValues }) => {
                                             label="страна производства"
                                             defaultValue={initialValues.assemblyPlace}
                                             onInput = {(e) =>{
-                                                e.target.value = e.target.value.toString().slice(0,30)
+                                                e.target.value = e.target.value.toString().slice(0,30);
+                                                e.target.value= e.target.value.replace(/[0-9]/g, '');
                                             }}
                                         />
                                     </Grid>

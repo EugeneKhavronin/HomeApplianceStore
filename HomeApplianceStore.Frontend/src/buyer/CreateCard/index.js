@@ -127,7 +127,8 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         type="text"
                                         label="ФИО"
                                         onInput = {(e) =>{
-                                            e.target.value = e.target.value.toString().slice(0,50)
+                                            e.target.value = e.target.value.toString().slice(0,50);
+                                            e.target.value= e.target.value.replace(/[0-9]/g, '');
                                         }}
                                     />
                                 </Grid>
@@ -192,7 +193,8 @@ export default function FullScreenDialog({basket, onSubmit, delLine,totalCost,ha
                                         type="text"
                                         label="текущий статус"
                                         onInput = {(e) =>{
-                                            e.target.value = e.target.value.toString().slice(0,30)
+                                            e.target.value = e.target.value.toString().slice(0,30);
+                                            e.target.value= e.target.value.replace(/[0-9]/g, '');
                                         }}
                                     />
                                 </Grid>

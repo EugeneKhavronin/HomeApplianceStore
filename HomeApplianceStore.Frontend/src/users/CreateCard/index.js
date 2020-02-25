@@ -112,7 +112,8 @@ const CreateCard = ({ onSubmit, handleClose, open,handleClickOpen }) => {
                                             type="text"
                                             label="ФИО"
                                             onInput = {(e) =>{
-                                                e.target.value = e.target.value.toString().slice(0,50)
+                                                e.target.value = e.target.value.toString().slice(0,50);
+                                                    e.target.value= e.target.value.replace(/[0-9]/g, '');
                                             }}
                                         />
                                     </Grid>
